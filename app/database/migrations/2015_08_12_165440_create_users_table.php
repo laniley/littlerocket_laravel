@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string('fb_id')->unique();
 			$table->string('first_name')->nullable();
 			$table->string('last_name')->nullable();
-			$table->string('picture')->nullable();
+			$table->string('img_url')->nullable();
 			$table->string('gender')->nullable();
 			$table->integer('score')->default(0);
 			$table->integer('stars')->default(0);
