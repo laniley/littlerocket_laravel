@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function()
+Route::group(array('prefix' => '/api/v1/'), function()
 {
-	return View::make('hello');
+
+    Route::resource('users', 'UserController');
+
 });
