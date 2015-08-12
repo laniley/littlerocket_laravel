@@ -13,7 +13,25 @@
 
 App::before(function($request)
 {
-	//
+    // Enable CORS
+    // In production, replace * with http://yourdomain.com
+	$http_origin = $_SERVER['HTTP_ORIGIN'];
+
+	if ($http_origin == "http://localhost:4200" || $http_origin == "http://www.littlerocket-game.com" || $http_origin == "https://www.littlerocket-game.com")
+	{
+	    header("Access-Control-Allow-Origin: $http_origin");
+	}
+
+    header('Access-Control-Allow-Credentials: true');
+
+    if (Request::getMethod() == "OPTIONS") {
+        // The client-side application can set only headers allowed in Access-Control-Allow-Headers
+        $headers = [
+            'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers'=> 'X-Requested-With, Content-Type, X-Auth-Token, Origin, Authorization, userid'
+        ];
+        return Response::make('You are connected to the API', 200, $headers);
+    }
 });
 
 
