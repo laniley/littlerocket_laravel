@@ -24,6 +24,7 @@ class UserController extends \BaseController {
 	   	$fb_id = Input::get('fb_id');
 
 			$user = User::where('fb_id', '=', $fb_id)->first();
+			$user->rank = $user->rank();
 
 		  return '{ "users": ['.$user.'] }';
 	  }
