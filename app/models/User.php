@@ -23,6 +23,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public function lab()
+  {
+      return $this->hasOne('Lab');
+  }
+
 	public function rank() {
 
 		DB::statement(DB::raw('set @row:=0'));
