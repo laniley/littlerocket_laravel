@@ -10,17 +10,14 @@ class UserController extends \BaseController {
 	public function index()
 	{
 		// test the DB-Connection
-		try
-	  {
+		try {
 	      $pdo = DB::connection('mysql')->getPdo();
 	  }
-	  catch(PDOException $exception)
-	  {
+	  catch(PDOException $exception) {
 	      return Response::make('Database error! ' . $exception->getCode() . ' - ' . $exception->getMessage());
 	  }
 
-	  if(Input::has('fb_id'))
-	  {
+	  if(Input::has('fb_id')) {
 	   	$fb_id = Input::get('fb_id');
 
 			$user = User::where('fb_id', '=', $fb_id)->first();
@@ -28,8 +25,22 @@ class UserController extends \BaseController {
 
 		  return '{ "users": ['.$user.'] }';
 	  }
-	  else
-	   	$users = User::all();
+		else if(Input::has('mode') && Input::has('mode') == "leaderboard") {
+
+			$users = User::orderByRankDesc()
+								->take(50)
+								->get();
+
+			foreach ($users as $user)
+			{
+				$user->rank = $user->rank();
+			}
+
+		  return '{ "users": '.$users.' }';
+	  }
+	  else {
+			$users = User::all();
+		}
 	}
 
 
