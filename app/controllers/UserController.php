@@ -13,7 +13,12 @@ class UserController extends \BaseController {
 	   	$fb_id = Input::get('fb_id');
 
 			$user = User::where('fb_id', '=', $fb_id)->first();
+
 			$user->rank = $user->rank();
+
+			if($user->lab_id) {
+					$user->lab_id = $user->lab->id;
+			}
 
 		  return '{ "users": ['.$user.'] }';
 	  }
@@ -26,6 +31,10 @@ class UserController extends \BaseController {
 			foreach ($users as $user)
 			{
 				$user->rank = $user->rank();
+
+				if($user->lab_id) {
+						$user->lab_id = $user->lab->id;
+				}
 			}
 
 		  return '{ "users": '.$users.' }';
@@ -63,9 +72,9 @@ class UserController extends \BaseController {
 			 'gender' => Input::get('user.gender'),
 			 'score' => Input::get('user.score'),
 			 'stars' => Input::get('user.stars'),
-			 'reached_level' => Input::get('user.reached_level'),
-			 'lab_id' => Input::get('user.lab_id'),
-			 'rocket_id' => Input::get('user.rocket_id')
+			 'reached_level' => Input::get('user.reached_level')
+			//  'lab_id' => Input::get('user.lab_id'),
+			//  'rocket_id' => Input::get('user.rocket_id')
  		));
 
 	   return '{"user":'.$user.' }';
@@ -123,11 +132,11 @@ class UserController extends \BaseController {
 		$user->reached_level = Input::get('user.reached_level');
 		$user->first_login = false;
 
-		$lab = Lab::find(Input::get('user.lab_id'));
+		// $lab = Lab::find(Input::get('user.lab_id'));
 
-		if(isset($lab)) {
-			$user->lab_id = $lab->id;
-		}
+		// if(isset($lab)) {
+			// $user->lab_id = $user->lab->id;
+		// }
 
 		// $rocket = Rocket::find(Input::get('user.rocket_id'));
 		//
@@ -136,6 +145,10 @@ class UserController extends \BaseController {
 		// }
 
 		$user->save();
+
+		if($user->lab_id) {
+				$user->lab_id = $user->lab->id;
+		}
 
 	  return '{"user":'.$user.' }';
 	}

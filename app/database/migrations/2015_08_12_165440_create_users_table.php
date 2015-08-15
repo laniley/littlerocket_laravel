@@ -26,9 +26,6 @@ class CreateUsersTable extends Migration {
 			$table->integer('reached_level')->default(1);
 			$table->boolean('first_login')->default(true);
 
-			$table->integer('lab_id')->unsigned()->nullable();
-			$table->integer('rocket_id')->unsigned()->nullable();
-
 			$table->dateTime('last_login')->default('0000-00-00 00:00:00');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

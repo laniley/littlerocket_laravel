@@ -35,8 +35,6 @@ class UserTableSeeder extends BaseSeeder {
       $newData["gender"] = "";
       $newData["score"] = $oldData["score"];
       $newData["stars"] = $oldData["stars"];
-      $newData["reached_level"] = 1;
-      $newData["first_login"] = 0;
       $newData["last_login"] = $oldData["updated_at"];
       $newData["created_at"] = $oldData["inserted_at"];
       $newData["updated_at"] = $oldData["updated_at"];
