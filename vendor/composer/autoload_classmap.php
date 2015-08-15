@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddForeignKeysToRocketComponentModelMm' => $baseDir . '/app/database/migrations/2015_08_12_195400_add_foreign_keys_to_rocket_component_model_mm.php',
-    'AddForeignKeysToRocketsTable' => $baseDir . '/app/database/migrations/2015_08_12_182940_add_foreign_keys_to_rockets_table.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BaseSeeder' => $baseDir . '/app/database/seeds/BaseSeeder.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
@@ -985,6 +984,7 @@ return array(
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
     'Psr\\Log\\Test\\DummyTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
     'Psr\\Log\\Test\\LoggerInterfaceTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+    'Rocket' => $baseDir . '/app/models/Rocket.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Stack\\Builder' => $vendorDir . '/stack/builder/src/Stack/Builder.php',
     'Stack\\StackedHttpKernel' => $vendorDir . '/stack/builder/src/Stack/StackedHttpKernel.php',
