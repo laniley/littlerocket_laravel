@@ -89,7 +89,34 @@ class RocketController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$rocket = Rocket::firstOrCreate(array(
+			 'user_id' => Input::get('rocket.user_id')
+		));
+
+		$canon = RocketComponent::where(array(
+			'id' => Input::get('rocket.canon_id'),
+			'type' => 'canon'
+		))->first();
+
+		$shield = RocketComponent::where(array(
+			'id' => Input::get('rocket.shield_id'),
+			'type' => 'shield'
+		))->first();
+
+		$engine = RocketComponent::where(array(
+			'id' => Input::get('rocket.engine_id'),
+			'type' => 'engine'
+		))->first();
+
+		$rocket->canon()->associate($canon);
+		$rocket->shield()->associate($shield);
+		$rocket->engine()->associate($engine);
+
+		$rocket->save();
+
+    $rocket = $this->prepareRocket($rocket);
+
+	  return '{"rocket":'.$rocket.' }';
 	}
 
 
@@ -106,16 +133,23 @@ class RocketController extends \BaseController {
 
   private function prepareRocket($rocket)
 	{
-		if($rocket->canon) {
-				$rocket->canon_id = $rocket->canon->id;
-		}
+		if($rocket) {
 
-    if($rocket->shield) {
-				$rocket->shield_id = $rocket->shield->id;
-		}
+			$canon = RocketComponent::canons()->where('rocket_id', $rocket->id)->first();
+			$shield = RocketComponent::shields()->where('rocket_id', $rocket->id)->first();
+			$engine = RocketComponent::engines()->where('rocket_id', $rocket->id)->first();
 
-    if($rocket->engine) {
-				$rocket->engine_id = $rocket->engine->id;
+			if($canon) {
+					$rocket->canon_id = $canon->id;
+			}
+
+	    if($shield) {
+					$rocket->shield_id = $shield->id;
+			}
+
+	    if($engine) {
+					$rocket->engine_id = $engine->id;
+			}
 		}
 
 		return $rocket;

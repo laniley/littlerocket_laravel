@@ -142,14 +142,16 @@ class UserController extends \BaseController {
 
 	private function prepareUser($user)
 	{
-		$user->rank = $user->rank();
+		if($user) {
+			$user->rank = $user->rank();
 
-		if($user->lab) {
-				$user->lab_id = $user->lab->id;
-		}
+			if($user->lab) {
+					$user->lab_id = $user->lab->id;
+			}
 
-		if($user->rocket) {
-				$user->rocket_id = $user->rocket->id;
+			if($user->rocket) {
+					$user->rocket_id = $user->rocket->id;
+			}
 		}
 
 		return $user;

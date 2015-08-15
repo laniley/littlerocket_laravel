@@ -23,18 +23,8 @@ class Rocket extends Eloquent{
       return $this->belongsTo('User');
   }
 
-  public function canon()
-  {
-      return $this->hasOne('RocketComponent');
-  }
-
-  public function shield()
-  {
-      return $this->hasOne('RocketComponent');
-  }
-
-  public function engine()
-  {
-      return $this->hasOne('RocketComponent');
-  }
+	public function rocketComponents()
+	{
+		return $this->hasMany('RocketComponent');
+	}
 }
