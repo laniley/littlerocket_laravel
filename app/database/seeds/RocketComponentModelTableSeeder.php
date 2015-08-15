@@ -3,7 +3,7 @@
 class RocketComponentModelTableSeeder extends BaseSeeder {
 
   public function __construct() {
-    $this->table = 'users'; // name of the db-table
+    $this->table = 'rocket_component_models'; // name of the db-table
   }
 
   /**
