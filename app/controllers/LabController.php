@@ -9,20 +9,11 @@ class LabController extends \BaseController {
 	 */
 	public function index()
 	{
-		// test the DB-Connection
-		try {
-	      $pdo = DB::connection('mysql')->getPdo();
-	  }
-	  catch(PDOException $exception) {
-	      return Response::make('Database error! ' . $exception->getCode() . ' - ' . $exception->getMessage());
-	  }
+		if(Input::has('user')) {
 
-	  if(Input::has('user')) {
-	   	$user_id = Input::get('user');
+      $user = User::find(Input::get('user'));
 
-			$lab = Lab::where('user_id', '=', $user_id)->first();
-
-		  return '{ "labs": ['.$lab.'] }';
+		  return '{ "labs": ['.$user->lab.'] }';
 	  }
 	  else {
 			$labs = Lab::all();
