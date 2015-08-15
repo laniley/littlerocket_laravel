@@ -14,11 +14,7 @@ class UserController extends \BaseController {
 
 			$user = User::where('fb_id', '=', $fb_id)->first();
 
-			$user->rank = $user->rank();
-
-			if($user->lab_id) {
-					$user->lab_id = $user->lab->id;
-			}
+			$user = $this->prepareUser($user);
 
 		  return '{ "users": ['.$user.'] }';
 	  }
@@ -30,17 +26,20 @@ class UserController extends \BaseController {
 
 			foreach ($users as $user)
 			{
-				$user->rank = $user->rank();
-
-				if($user->lab_id) {
-						$user->lab_id = $user->lab->id;
-				}
+				$user = $this->prepareUser($user);
 			}
 
 		  return '{ "users": '.$users.' }';
 	  }
 	  else {
 			$users = User::all();
+
+			foreach ($users as $user)
+			{
+				$user = $this->prepareUser($user);
+			}
+
+			return '{ "users": '.$users.' }';
 		}
 	}
 
@@ -73,11 +72,11 @@ class UserController extends \BaseController {
 			 'score' => Input::get('user.score'),
 			 'stars' => Input::get('user.stars'),
 			 'reached_level' => Input::get('user.reached_level')
-			//  'lab_id' => Input::get('user.lab_id'),
-			//  'rocket_id' => Input::get('user.rocket_id')
  		));
 
-	   return '{"user":'.$user.' }';
+		$user = $this->prepareUser($user);
+
+	  return '{"user":'.$user.' }';
 	}
 
 
@@ -113,16 +112,6 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		// test the DB-Connection
-		try
-	  {
-	      $pdo = DB::connection('mysql')->getPdo();
-	  }
-	  catch(PDOException $exception)
-	  {
-	      return Response::make('Database error! ' . $exception->getCode() . ' - ' . $exception->getMessage());
-	  }
-
 		$user = User::findOrFail($id);
 		$user->email = Input::get('user.email');
 		$user->img_url = Input::get('user.img_url');
@@ -132,23 +121,9 @@ class UserController extends \BaseController {
 		$user->reached_level = Input::get('user.reached_level');
 		$user->first_login = false;
 
-		// $lab = Lab::find(Input::get('user.lab_id'));
-
-		// if(isset($lab)) {
-			// $user->lab_id = $user->lab->id;
-		// }
-
-		// $rocket = Rocket::find(Input::get('user.rocket_id'));
-		//
-		// if(isset($rocket)) {
-		// 	$user->rocket_id = $rocket->id;
-		// }
-
 		$user->save();
 
-		if($user->lab_id) {
-				$user->lab_id = $user->lab->id;
-		}
+		$user = $this->prepareUser($user);
 
 	  return '{"user":'.$user.' }';
 	}
@@ -165,5 +140,19 @@ class UserController extends \BaseController {
 		//
 	}
 
+	private function prepareUser($user)
+	{
+		$user->rank = $user->rank();
+
+		if($user->lab) {
+				$user->lab_id = $user->lab->id;
+		}
+
+		if($user->rocket) {
+				$user->rocket_id = $user->rocket->id;
+		}
+
+		return $user;
+	}
 
 }
