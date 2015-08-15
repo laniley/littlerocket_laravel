@@ -16,8 +16,12 @@ class CreateRocketComponentModelsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('type');
+			$table->integer('model');
 			$table->integer('costs')->default(500);
 			$table->integer('construction_time')->default(150);
+
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 		});
 	}
 
