@@ -18,5 +18,6 @@ Route::group(array('prefix' => '/api/v1/'), function()
     Route::resource('labs', 'LabController');
     Route::resource('rockets', 'RocketController');
     Route::resource('rocketComponents', 'RocketComponentController');
+    Route::resource('rocketComponentModels', 'RocketComponentModelController');
 
 });
