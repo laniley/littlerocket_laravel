@@ -14,7 +14,7 @@ class Rocket extends Eloquent{
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('created_at', 'updated_at');
+	protected $hidden = array('created_at', 'updated_at', 'canon', 'shield', 'engine');
 
 	protected $fillable = array('user_id', 'canon_id', 'shield_id', 'engine_id');
 

@@ -12,11 +12,19 @@ class RocketController extends \BaseController {
 	  if(Input::has('user')) {
 
       $user = User::find(Input::get('user'));
-
-		  return '{ "rockets": ['.$user->rocket.'] }';
+      $rocket = $user->rocket;
+      $rocket = $this->prepareRocket($rocket);
+		  return '{ "rockets": ['.$rocket.'] }';
 	  }
 	  else {
 			$rockets = Rocket::all();
+
+      foreach ($rockets as $rocket)
+			{
+				$rocket = $this->prepareRocket($rocket);
+			}
+
+      return '{ "rockets": '.$rockets.' }';
 		}
 	}
 
@@ -42,7 +50,7 @@ class RocketController extends \BaseController {
 		$rocket = Rocket::firstOrCreate(array(
 			 'user_id' => Input::get('rocket.user_id')
 		));
-
+    $rocket = $this->prepareRocket($rocket);
 	  return '{"rocket":'.$rocket.' }';
 	}
 
@@ -55,8 +63,8 @@ class RocketController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$rocket = Rocket::findOrFail($id);
-
+    $rocket = Rocket::findOrFail($id);
+    $rocket = $this->prepareRocket($rocket);
 		return '{"rocket":'.$rocket.' }';
 	}
 
@@ -96,5 +104,20 @@ class RocketController extends \BaseController {
 		//
 	}
 
+  private function prepareRocket($rocket)
+	{
+		if($rocket->canon) {
+				$rocket->canon_id = $rocket->canon->id;
+		}
 
+    if($rocket->shield) {
+				$rocket->shield_id = $rocket->shield->id;
+		}
+
+    if($rocket->engine) {
+				$rocket->engine_id = $rocket->engine->id;
+		}
+
+		return $rocket;
+	}
 }
