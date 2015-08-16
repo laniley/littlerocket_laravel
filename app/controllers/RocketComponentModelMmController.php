@@ -95,8 +95,17 @@ class RocketComponentModelMmController extends \BaseController {
 		$rocketComponentModelMm->status = Input::get('rocketComponentModelMm.status');
 		$rocketComponentModelMm->rocketComponent_id = Input::get('rocketComponentModelMm.rocketComponent_id');
 		$rocketComponentModelMm->rocketComponentModel_id = Input::get('rocketComponentModelMm.rocketComponentModel_id');
-		$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id');
-		$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id');
+
+		if(Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id') != null) {
+			$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id');
+		}
+
+		if(Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id') != null) {
+			$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id');
+		}
+
+		$rocketComponentModelMm->save();
+
     $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
 	  return '{"rocketComponentModelMm":'.$rocketComponentModelMm.' }';
 	}
