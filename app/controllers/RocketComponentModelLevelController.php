@@ -103,6 +103,9 @@ class RocketComponentModelLevelController extends \BaseController {
 
   private function prepareRocketComponentModelLevel($rocketComponentModelLevel)
 	{
+		if($rocketComponentModelLevel->type == 'recharge_rate') {
+			$rocketComponentModelLevel->value = $rocketComponentModelLevel->value / 10;
+		}
 		return $rocketComponentModelLevel;
 	}
 }
