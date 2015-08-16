@@ -59,9 +59,9 @@ class RocketComponentModelController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		// $rocketComponent = RocketComponent::findOrFail($id);
-    // $rocketComponent = $this->prepareRocketComponent($rocketComponent);
-		// return '{"rocketComponent":'.$rocketComponent.' }';
+		$rocketComponentModel = RocketComponentModel::findOrFail($id);
+    $rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
+		return '{"rocketComponentModel":'.$rocketComponentModel.' }';
 	}
 
 
