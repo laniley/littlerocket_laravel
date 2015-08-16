@@ -21,5 +21,6 @@ Route::group(array('prefix' => '/api/v1/'), function()
     Route::resource('rocketComponentModels', 'RocketComponentModelController');
     Route::resource('rocketComponentModelMms', 'RocketComponentModelMmController');
     Route::resource('rocketComponentModelLevels', 'RocketComponentModelLevelController');
+    Route::resource('rocketComponentModelLevelMms', 'RocketComponentModelLevelMmController');
 
 });

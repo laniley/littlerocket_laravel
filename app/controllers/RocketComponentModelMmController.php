@@ -90,7 +90,15 @@ class RocketComponentModelMmController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$rocketComponentModelMm = RocketComponentModelMm::findOrFail($id);
+		$rocketComponentModelMm->construction_start = Input::get('rocketComponentModelMm.construction_start');
+		$rocketComponentModelMm->status = Input::get('rocketComponentModelMm.status');
+		$rocketComponentModelMm->rocketComponent_id = Input::get('rocketComponentModelMm.rocketComponent_id');
+		$rocketComponentModelMm->rocketComponentModel_id = Input::get('rocketComponentModelMm.rocketComponentModel_id');
+		$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id');
+		$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id');
+    $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
+	  return '{"rocketComponentModelMm":'.$rocketComponentModelMm.' }';
 	}
 
 
