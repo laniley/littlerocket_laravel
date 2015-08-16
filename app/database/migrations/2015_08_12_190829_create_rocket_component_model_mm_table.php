@@ -35,7 +35,10 @@ class CreateRocketComponentModelMmTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('rocket_component_model_mm');
+		if (Schema::hasTable('rocket_component_model_mm'))
+		{
+			Schema::drop('rocket_component_model_mm');
+		}
 	}
 
 }

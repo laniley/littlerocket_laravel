@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRocketComponentModelRechargeRateLevelMmTable extends Migration {
+class CreateRocketComponentModelLevelMmTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,20 +12,20 @@ class CreateRocketComponentModelRechargeRateLevelMmTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('rocket_component_model_recharge_rate_level_mm', function(Blueprint $table)
+		Schema::create('rocket_component_model_level_mm', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('construction_start')->default(0);
 			$table->string('status')->default('locked');
 
 			$table->integer('rocketComponentModelMm_id')->unsigned();
-			$table->integer('rocketComponentModelRechargeRateLevel_id')->unsigned();
+			$table->integer('rocketComponentModelLevel_id')->unsigned();
 
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
-			$table->foreign('rocketComponentModelMm_id', 'recharge_level_mm_model_foreign')->references('id')->on('rocket_component_models');
-			$table->foreign('rocketComponentModelRechargeRateLevel_id', 'recharge_level_mm_recharge_level_foreign')->references('id')->on('rocket_component_model_recharge_rate_levels');
+			$table->foreign('rocketComponentModelMm_id', 'level_mm_model_mm_foreign')->references('id')->on('rocket_component_model_mm');
+			$table->foreign('rocketComponentModelLevel_id', 'level_mm_level_foreign')->references('id')->on('rocket_component_model_levels');
 		});
 	}
 
@@ -36,7 +36,10 @@ class CreateRocketComponentModelRechargeRateLevelMmTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('rocket_component_model_recharge_rate_level_mm');
+		if (Schema::hasTable('rocket_component_model_level_mm'))
+		{
+			Schema::drop('rocket_component_model_level_mm');
+		}
 	}
 
 }
