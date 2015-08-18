@@ -125,7 +125,12 @@ class UserController extends \BaseController {
 
 		$user = $this->prepareUser($user);
 
-	  return '{"user":'.$user.' }';
+		$userResponse = array(
+			'id' => $user->id,
+			'rank' => $user->rank
+		);
+
+	  return '{"user":'.json_encode($userResponse).' }';
 	}
 
 
