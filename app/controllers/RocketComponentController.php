@@ -52,7 +52,24 @@ class RocketComponentController extends \BaseController {
        'type' => Input::get('rocketComponent.type')
 		));
 
-		$rocketComponent = $this->updateRocketComponent($rocketComponent);
+		$rocketComponent->type = Input::get('rocketComponent.type');
+    $rocketComponent->costs = Input::get('rocketComponent.costs');
+    $rocketComponent->construction_time = Input::get('rocketComponent.construction_time');
+    $rocketComponent->construction_start = Input::get('rocketComponent.construction_start');
+    $rocketComponent->status = Input::get('rocketComponent.status');
+
+		if(Input::has('rocketComponent.selectedRocketComponentModelMm_id')) {
+			$selectedRocketComponentModelMm = RocketComponentModelMm::find(Input::get('rocketComponent.selectedRocketComponentModelMm_id'));
+
+			if($selectedRocketComponentModelMm) {
+				$rocketComponent->selectedRocketComponentModelMm_id = $selectedRocketComponentModelMm->id;
+			}
+		}
+
+    $rocketComponent->save();
+
+		return $rocketComponent;
+
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
 
 	  return '{"rocketComponent":'.$rocketComponent.' }';
@@ -95,7 +112,19 @@ class RocketComponentController extends \BaseController {
 	{
 		$rocketComponent = RocketComponent::findOrFail($id);
 
-    $rocketComponent = $this->updateRocketComponent($rocketComponent);
+    $rocketComponent->construction_start = Input::get('rocketComponent.construction_start');
+    $rocketComponent->status = Input::get('rocketComponent.status');
+
+		if(Input::has('rocketComponent.selectedRocketComponentModelMm_id')) {
+			$selectedRocketComponentModelMm = RocketComponentModelMm::find(Input::get('rocketComponent.selectedRocketComponentModelMm_id'));
+
+			if($selectedRocketComponentModelMm) {
+				$rocketComponent->selectedRocketComponentModelMm_id = $selectedRocketComponentModelMm->id;
+			}
+		}
+
+    $rocketComponent->save();
+
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
 
 	  return '{"rocketComponent":'.$rocketComponent.' }';
@@ -115,27 +144,6 @@ class RocketComponentController extends \BaseController {
 
   private function prepareRocketComponent($rocketComponent)
 	{
-		return $rocketComponent;
-	}
-
-	private function updateRocketComponent($rocketComponent)
-	{
-		$rocketComponent->type = Input::get('rocketComponent.type');
-    $rocketComponent->costs = Input::get('rocketComponent.costs');
-    $rocketComponent->construction_time = Input::get('rocketComponent.construction_time');
-    $rocketComponent->construction_start = Input::get('rocketComponent.construction_start');
-    $rocketComponent->status = Input::get('rocketComponent.status');
-
-		if(Input::has('rocketComponent.selectedRocketComponentModelMm_id')) {
-			$selectedRocketComponentModelMm = RocketComponentModelMm::find(Input::get('rocketComponent.selectedRocketComponentModelMm_id'));
-
-			if($selectedRocketComponentModelMm) {
-				$rocketComponent->selectedRocketComponentModelMm_id = $selectedRocketComponentModelMm->id;
-			}
-		}
-
-    $rocketComponent->save();
-
 		return $rocketComponent;
 	}
 }
