@@ -85,7 +85,12 @@ class LabController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$lab = Lab::findOrFail($id);
+
+    $lab->construction_start = Input::get('lab.construction_start');
+		$lab->status = Input::get('lab.status');
+
+	  return '{"lab":'.$lab.' }';
 	}
 
 
