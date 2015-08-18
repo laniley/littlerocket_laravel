@@ -90,6 +90,8 @@ class LabController extends \BaseController {
     $lab->construction_start = Input::get('lab.construction_start');
 		$lab->status = Input::get('lab.status');
 
+		$lab->save();
+
 	  return '{"lab":'.$lab.' }';
 	}
 
