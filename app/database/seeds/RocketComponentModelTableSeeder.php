@@ -38,42 +38,42 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
       'type' => 'shield',
       'model' => 1,
       'costs' => 500,
-      'construction_time' => 120
+      'construction_time' => 1200
     ));
 
     RocketComponentModel::create(array(
       'type' => 'shield',
       'model' => 2,
       'costs' => 750,
-      'construction_time' => 600
+      'construction_time' => 2400
     ));
 
     RocketComponentModel::create(array(
       'type' => 'shield',
       'model' => 3,
       'costs' => 1000,
-      'construction_time' => 1200
+      'construction_time' => 4800
     ));
 
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 1,
       'costs' => 500,
-      'construction_time' => 120
+      'construction_time' => 12000
     ));
 
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 2,
       'costs' => 750,
-      'construction_time' => 600
+      'construction_time' => 24000
     ));
 
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 3,
       'costs' => 1000,
-      'construction_time' => 1200
+      'construction_time' => 48000
     ));
   }
 
