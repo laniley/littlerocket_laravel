@@ -17,7 +17,7 @@ App::before(function($request)
     // In production, replace * with http://yourdomain.com
 	$http_origin = $_SERVER['HTTP_ORIGIN'];
 
-	if ($http_origin == "http://localhost:4200" || $http_origin == "http://www.littlerocket-game.com" || $http_origin == "https://www.littlerocket-game.com")
+	if ($http_origin == "http://localhost:4200" || $http_origin == "http://www.littlerocket-game.com" || $http_origin == "http://littlerocket-game.com" || $http_origin == "https://www.littlerocket-game.com" || $http_origin == "https://littlerocket-game.com")
 	{
 	    header("Access-Control-Allow-Origin: $http_origin");
 	}
