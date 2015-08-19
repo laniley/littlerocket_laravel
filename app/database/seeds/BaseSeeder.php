@@ -28,41 +28,44 @@ class BaseSeeder extends Seeder {
      */
      protected function getDataFromCSV($filename, $deliminator = ",") {
 
-       $filename = str_replace("/", "\\", $filename);
+     if(App::isLocal()) {
+        $filename = str_replace("/", "\\", $filename);
+     }
 
-       if(!file_exists($filename)) {
-         var_dump('file does not exist - '.$filename);
-         return FALSE;
-       }
-       if(!is_readable($filename)) {
-         var_dump('file is not readable - '.$filename);
-         return FALSE;
-       }
 
-       $header = NULL;
-       $data = array();
+     if(!file_exists($filename)) {
+       var_dump('file does not exist - '.$filename);
+       return FALSE;
+     }
+     if(!is_readable($filename)) {
+       var_dump('file is not readable - '.$filename);
+       return FALSE;
+     }
 
-       if(($handle = fopen($filename, 'r')) !== FALSE) {
-         while(($row = fgetcsv($handle, 1000, $deliminator)) !== FALSE) {
-           if(!$header) {
-             $header = $row;
+     $header = NULL;
+     $data = array();
+
+     if(($handle = fopen($filename, 'r')) !== FALSE) {
+       while(($row = fgetcsv($handle, 1000, $deliminator)) !== FALSE) {
+         if(!$header) {
+           $header = $row;
+         }
+         else {
+           if (count($row) == count($header)) {
+             $data[] = array_combine($header, $row);
            }
            else {
-             if (count($row) == count($header)) {
-               $data[] = array_combine($header, $row);
-             }
-             else {
-               var_dump("not matchable data - ".implode(",", $row));
-             }
+             var_dump("not matchable data - ".implode(",", $row));
            }
          }
-         fclose($handle);
        }
-       else {
-         var_dump('could not open file - '.$filename);
-         return FALSE;
-       }
-
-       return $data;
+       fclose($handle);
      }
+     else {
+       var_dump('could not open file - '.$filename);
+       return FALSE;
+     }
+
+     return $data;
+   }
 }
