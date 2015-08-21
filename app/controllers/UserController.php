@@ -62,17 +62,20 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		 $user = User::firstOrCreate(array(
-			 'fb_id' => Input::get('user.fb_id'),
-			 'email' => Input::get('user.email'),
-			 'first_name' => Input::get('user.first_name'),
-			 'last_name' => Input::get('user.last_name'),
-			 'img_url' => Input::get('user.img_url'),
-			 'gender' => Input::get('user.gender'),
-			 'score' => Input::get('user.score'),
-			 'stars' => Input::get('user.stars'),
-			 'reached_level' => Input::get('user.reached_level')
- 		));
+		$user = User::firstOrCreate(array(
+		 'fb_id' => Input::get('user.fb_id')
+		));
+
+		$user->email = Input::get('user.email');
+		$user->first_name = Input::get('user.first_name');
+		$user->last_name = Input::get('user.last_name');
+		$user->img_url = Input::get('user.img_url');
+		$user->gender = Input::get('user.gender');
+		$user->score = Input::get('user.score');
+		$user->stars = Input::get('user.stars');
+		$user->reached_level = Input::get('user.reached_level');
+
+		$user->save();
 
 		$user = $this->prepareUser($user);
 
