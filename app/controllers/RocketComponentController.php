@@ -11,10 +11,10 @@ class RocketComponentController extends \BaseController {
 	{
 	  if(Input::has('rocket') && Input::has('type')) {
 
-      $rocketComponents = RocketComponent::find(array(
+      $rocketComponents = RocketComponent::where(array(
         'rocket_id' => Input::get('rocket'),
         'type' => Input::get('type')
-      ));
+      ))->get();
 	  }
 	  else {
 			$rocketComponents = RocketComponent::all();
