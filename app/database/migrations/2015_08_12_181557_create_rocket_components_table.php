@@ -28,7 +28,7 @@ class CreateRocketComponentsTable extends Migration {
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
 			$table->foreign('rocket_id')->references('id')->on('rockets');
-			$table->foreign('selectedRocketComponentModelMm_id')->references('id')->on('rocket_components');
+			$table->foreign('selectedRocketComponentModelMm_id')->references('id')->on('rocket_component_model_mm');
 		});
 	}
 
