@@ -122,6 +122,7 @@ class UserController extends \BaseController {
 		$user->score = Input::get('user.score');
 		$user->stars = Input::get('user.stars');
 		$user->reached_level = Input::get('user.reached_level');
+		$user->experience = Input::get('user.experience');
 		$user->first_login = false;
 
 		$user->save();

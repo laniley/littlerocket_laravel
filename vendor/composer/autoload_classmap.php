@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddExpLvlColumnsToUsersTable' => $baseDir . '/app/database/migrations/2015_09_05_101346_add_exp_lvl_columns_to_users_table.php',
     'AddForeignKeysToRocketComponentModelMmTable' => $baseDir . '/app/database/migrations/2015_08_16_133639_add_foreign_keys_to_rocket_component_model_mm_table.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BaseSeeder' => $baseDir . '/app/database/seeds/BaseSeeder.php',
@@ -987,6 +988,11 @@ return array(
     'RocketComponentController' => $baseDir . '/app/controllers/RocketComponentController.php',
     'RocketComponentModel' => $baseDir . '/app/models/RocketComponentModel.php',
     'RocketComponentModelController' => $baseDir . '/app/controllers/RocketComponentModelController.php',
+    'RocketComponentModelLevel' => $baseDir . '/app/models/RocketComponentModelLevel.php',
+    'RocketComponentModelLevelController' => $baseDir . '/app/controllers/RocketComponentModelLevelController.php',
+    'RocketComponentModelLevelMm' => $baseDir . '/app/models/RocketComponentModelLevelMm.php',
+    'RocketComponentModelLevelMmController' => $baseDir . '/app/controllers/RocketComponentModelLevelMmController.php',
+    'RocketComponentModelLevelTableSeeder' => $baseDir . '/app/database/seeds/RocketComponentModelLevelTableSeeder.php',
     'RocketComponentModelMm' => $baseDir . '/app/models/RocketComponentModelMm.php',
     'RocketComponentModelMmController' => $baseDir . '/app/controllers/RocketComponentModelMmController.php',
     'RocketComponentModelTableSeeder' => $baseDir . '/app/database/seeds/RocketComponentModelTableSeeder.php',

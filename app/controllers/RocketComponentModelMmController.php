@@ -9,13 +9,19 @@ class RocketComponentModelMmController extends \BaseController {
 	 */
 	public function index()
 	{
-	  if(Input::has('rocketComponent') && Input::has('rocketComponentModel')) {
-
-      $rocketComponentModelMms = RocketComponentModelMm::where(array(
-        'rocketComponent_id' => Input::get('rocketComponent'),
-        'rocketComponentModel_id' => Input::get('rocketComponentModel')
-      ))->get();
-	  }
+		if(Input::has('rocketComponent') || Input::has('rocketComponentModel')) {
+		  if(Input::has('rocketComponent') && Input::has('rocketComponentModel')) {
+	      $rocketComponentModelMms = RocketComponentModelMm::where(array(
+	        'rocketComponent_id' => Input::get('rocketComponent'),
+	        'rocketComponentModel_id' => Input::get('rocketComponentModel')
+	      ))->get();
+		  }
+			else if(Input::has('rocketComponent')) {
+				$rocketComponentModelMms = RocketComponentModelMm::where(array(
+	        'rocketComponent_id' => Input::get('rocketComponent')
+	      ))->get();
+			}
+		}
 	  else {
 			$rocketComponentModelMms = RocketComponentModelMm::all();
     }
