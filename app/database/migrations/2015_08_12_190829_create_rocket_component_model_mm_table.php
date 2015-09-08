@@ -26,6 +26,11 @@ class CreateRocketComponentModelMmTable extends Migration {
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 		});
+
+		Schema::table('rocket_components', function($table)
+		{
+			$table->foreign('selectedRocketComponentModelMm_id')->references('id')->on('rocket_component_model_mm');
+		});
 	}
 
 	/**
@@ -35,6 +40,11 @@ class CreateRocketComponentModelMmTable extends Migration {
 	 */
 	public function down()
 	{
+		if (Schema::hasTable('rocket_components'))
+		{
+			$table->dropForeign('selectedRocketComponentModelMm_id');
+		}
+
 		if (Schema::hasTable('rocket_component_model_mm'))
 		{
 			Schema::drop('rocket_component_model_mm');

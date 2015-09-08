@@ -27,7 +27,10 @@ class AddExpLvlColumnsToUsersTable extends Migration {
 	{
 		if (Schema::hasTable('users'))
 		{
-			$table->dropColumn(array('experience'));
+			Schema::table('users', function($table)
+			{
+				$table->dropColumn(array('experience'));
+			});
 		}
 	}
 
