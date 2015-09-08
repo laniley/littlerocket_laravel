@@ -68,8 +68,6 @@ class RocketComponentController extends \BaseController {
 
     $rocketComponent->save();
 
-		return $rocketComponent;
-
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
 
 	  return '{"rocketComponent":'.$rocketComponent.' }';

@@ -29,7 +29,7 @@ class CreateRocketComponentModelMmTable extends Migration {
 
 		Schema::table('rocket_components', function($table)
 		{
-			$table->foreign('selectedRocketComponentModelMm_id')->references('id')->on('rocket_component_model_mm');
+			$table->foreign('selectedRocketComponentModelMm_id', 'comp_comp_model_mm_foreign')->references('id')->on('rocket_component_model_mm');
 		});
 	}
 
@@ -40,9 +40,12 @@ class CreateRocketComponentModelMmTable extends Migration {
 	 */
 	public function down()
 	{
-		if (Schema::hasTable('rocket_components'))
+		if (Schema::hasColumn('rocket_components', 'selectedRocketComponentModelMm_id'))
 		{
-			$table->dropForeign('selectedRocketComponentModelMm_id');
+			Schema::table('rocket_components', function($table)
+			{
+				$table->dropForeign('comp_comp_model_mm_foreign');
+			});
 		}
 
 		if (Schema::hasTable('rocket_component_model_mm'))
