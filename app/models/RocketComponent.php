@@ -8,13 +8,12 @@ class RocketComponent extends Eloquent{
 	 * @var string
 	 */
 	protected $table = 'rocket_components';
-
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('created_at', 'updated_at');
+	protected $hidden = array('created_at', 'updated_at', 'myRocketComponentModelMms');
 
 	protected $fillable = array('rocket_id', 'selectedRocketComponentModelMm');
 
@@ -27,6 +26,11 @@ class RocketComponent extends Eloquent{
   {
       return $this->hasOne('RocketComponentModelMm');
   }
+
+	public function myRocketComponentModelMms()
+	{
+			return $this->hasMany('RocketComponentModelMm', 'rocketComponent_id');
+	}
 
 	public function scopeCanons($query)
   {
@@ -41,5 +45,19 @@ class RocketComponent extends Eloquent{
   public function scopeEngines($query)
   {
 			return $query->where('type', '=', 'engine');
+  }
+
+	public static function convertToArray($row)
+  {
+      $data = $row instanceof Arrayable ? $row->toArray() : (array) $row;
+      foreach (array_keys($data) as $key) {
+          if (is_object($data[$key])) {
+              $data[$key] = $row->$key;
+          } else if (is_array($data[$key])) {
+              $data[$key] = static::convertToArray($data[$key]);
+          }
+      }
+
+      return $data;
   }
 }

@@ -142,6 +142,12 @@ class RocketComponentController extends \BaseController {
 
   private function prepareRocketComponent($rocketComponent)
 	{
+		$modelMms = $rocketComponent->myRocketComponentModelMms;
+		$modelMmIds = [];
+		foreach($modelMms as $modelMm) {
+			array_push($modelMmIds, $modelMm->id);
+		}
+		$rocketComponent["rocketComponentModelMms"] = $modelMmIds;
 		return $rocketComponent;
 	}
 }
