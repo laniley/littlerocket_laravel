@@ -14,7 +14,12 @@ class RocketComponentModel extends Eloquent{
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('created_at', 'updated_at');
+	protected $hidden = array('created_at', 'updated_at', 'levels');
+
+	public function levels()
+  {
+      return $this->hasMany('RocketComponentModelLevel', 'rocketComponentModel_id');
+  }
 
 	public function scopeCanons($query)
   {

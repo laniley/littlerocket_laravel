@@ -78,7 +78,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 1,
         'costs' => 500,
         'construction_time' => 120,
-        'value' => 3,
+        'value' => 6,
         'rocketComponentModel_id' => 2
       ));
 
@@ -87,7 +87,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 2,
         'costs' => 750,
         'construction_time' => 240,
-        'value' => 4,
+        'value' => 8,
         'rocketComponentModel_id' => 2
       ));
 
@@ -96,7 +96,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 3,
         'costs' => 1000,
         'construction_time' => 480,
-        'value' => 5,
+        'value' => 10,
         'rocketComponentModel_id' => 2
       ));
 
@@ -106,7 +106,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 1,
         'costs' => 500,
         'construction_time' => 120,
-        'value' => 1,
+        'value' => 4,
         'rocketComponentModel_id' => 2
       ));
 
@@ -115,7 +115,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 2,
         'costs' => 750,
         'construction_time' => 240,
-        'value' => 2,
+        'value' => 5,
         'rocketComponentModel_id' => 2
       ));
 
@@ -124,7 +124,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'level' => 3,
         'costs' => 1000,
         'construction_time' => 480,
-        'value' => 3,
+        'value' => 6,
         'rocketComponentModel_id' => 2
       ));
 
@@ -135,7 +135,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 1,
       'costs' => 500,
       'construction_time' => 120,
-      'value' => 3,
+      'value' => 12,
       'rocketComponentModel_id' => 3
     ));
 
@@ -144,7 +144,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 2,
       'costs' => 750,
       'construction_time' => 240,
-      'value' => 4,
+      'value' => 15,
       'rocketComponentModel_id' => 3
     ));
 
@@ -153,7 +153,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 3,
       'costs' => 1000,
       'construction_time' => 480,
-      'value' => 5,
+      'value' => 20,
       'rocketComponentModel_id' => 3
     ));
 
@@ -163,7 +163,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 1,
       'costs' => 500,
       'construction_time' => 120,
-      'value' => 1,
+      'value' => 7,
       'rocketComponentModel_id' => 3
     ));
 
@@ -172,7 +172,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 2,
       'costs' => 750,
       'construction_time' => 240,
-      'value' => 2,
+      'value' => 8,
       'rocketComponentModel_id' => 3
     ));
 
@@ -181,7 +181,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'level' => 3,
       'costs' => 1000,
       'construction_time' => 480,
-      'value' => 3,
+      'value' => 9,
       'rocketComponentModel_id' => 3
     ));
 

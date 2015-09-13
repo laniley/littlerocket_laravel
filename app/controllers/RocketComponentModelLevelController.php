@@ -9,14 +9,21 @@ class RocketComponentModelLevelController extends \BaseController {
 	 */
 	public function index()
 	{
-	  if(Input::has('type') && Input::has('level') && Input::has('rocketComponentModel')) {
-
-      $rocketComponentModelLevels = RocketComponentModelLevel::where(array(
-        'type' => Input::get('type'),
-        'level' => Input::get('level'),
-        'rocketComponentModel_id' => Input::get('rocketComponentModel')
-      ))->get();
-	  }
+		if(Input::has('type') || Input::has('level') || Input::has('rocketComponentModel')) {
+		  if(Input::has('type') && Input::has('level') && Input::has('rocketComponentModel')) {
+	      $rocketComponentModelLevels = RocketComponentModelLevel::where(array(
+	        'type' => Input::get('type'),
+	        'level' => Input::get('level'),
+	        'rocketComponentModel_id' => Input::get('rocketComponentModel')
+	      ))->get();
+		  }
+			else if(Input::has('type') && Input::has('rocketComponentModel')) {
+				$rocketComponentModelLevels = RocketComponentModelLevel::where(array(
+	        'type' => Input::get('type'),
+	        'rocketComponentModel_id' => Input::get('rocketComponentModel')
+	      ))->get();
+			}
+		}
 	  else {
 			$rocketComponentModelLevels = RocketComponentModelLevel::all();
     }

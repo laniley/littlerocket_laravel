@@ -51,6 +51,8 @@ class RocketComponentModelLevelMmController extends \BaseController {
       'rocketComponentModelMm_id' => Input::get('rocketComponentModelLevelMm.rocketComponentModelMm_id'),
       'rocketComponentModelLevel_id' => Input::get('rocketComponentModelLevelMm.rocketComponentModelLevel_id')
 		));
+		$rocketComponentModelLevelMm->status = Input::get('rocketComponentModelLevelMm.status');
+		$rocketComponentModelLevelMm->save();
     $rocketComponentModelLevelMm = $this->prepareRocketComponentModelLevelMm($rocketComponentModelLevelMm);
 	  return '{"rocketComponentModelLevelMm":'.$rocketComponentModelLevelMm.' }';
 	}
@@ -90,7 +92,11 @@ class RocketComponentModelLevelMmController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$rocketComponentModelLevelMm = RocketComponentModelLevelMm::findOrFail($id);
+		$rocketComponentModelLevelMm->status = Input::get('rocketComponentModelLevelMm.status');
+		$rocketComponentModelLevelMm->save();
+    $rocketComponentModelLevelMm = $this->prepareRocketComponentModelLevelMm($rocketComponentModelLevelMm);
+		return '{"rocketComponentModelLevelMm":'.$rocketComponentModelLevelMm.' }';
 	}
 
 

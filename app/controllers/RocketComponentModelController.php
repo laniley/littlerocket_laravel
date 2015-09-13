@@ -109,6 +109,12 @@ class RocketComponentModelController extends \BaseController {
 
   private function prepareRocketComponentModel($rocketComponentModel)
 	{
+		$levels = $rocketComponentModel->levels;
+		$levelIds = [];
+		foreach($levels as $level) {
+			array_push($levelIds, $level->id);
+		}
+		$rocketComponentModel["rocketComponentModelLevels"] = $levelIds;
 		return $rocketComponentModel;
 	}
 }

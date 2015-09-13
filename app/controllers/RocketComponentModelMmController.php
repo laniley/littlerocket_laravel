@@ -57,6 +57,8 @@ class RocketComponentModelMmController extends \BaseController {
 			 'rocketComponent_id' => Input::get('rocketComponentModelMm.rocketComponent_id'),
        'rocketComponentModel_id' => Input::get('rocketComponentModelMm.rocketComponentModel_id')
 		));
+		$rocketComponentModelMm->status = Input::get('rocketComponentModelMm.status');
+		$rocketComponentModelMm->save();
     $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
 	  return '{"rocketComponentModelMm":'.$rocketComponentModelMm.' }';
 	}
