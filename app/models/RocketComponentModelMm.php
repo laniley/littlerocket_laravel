@@ -14,7 +14,15 @@ class RocketComponentModelMm extends Eloquent{
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('created_at', 'updated_at');
+	protected $hidden = array(
+		'created_at',
+		'updated_at',
+		'rocketComponentModelCapacityLevelMm_id',
+		'rocketComponentModelRechargeRateLevelMm_id',
+		'myRocketComponentModelLevelMms',
+		'myRocketComponentModelCapacityLevelMms',
+		'myRocketComponentModelRechargeRateLevelMms'
+	);
 
 	protected $fillable = array('rocketComponent_id', 'rocketComponentModel_id');
 
@@ -27,4 +35,29 @@ class RocketComponentModelMm extends Eloquent{
   {
       return $this->belongsTo('RocketComponentModel');
   }
+
+	public function rocketComponentModelCapacityLevelMm()
+  {
+      return $this->belongsTo('RocketComponentModelLevelMm');
+  }
+
+	public function rocketComponentModelRechargeRateLevelMm()
+  {
+      return $this->belongsTo('RocketComponentModelLevelMm');
+  }
+
+	public function myRocketComponentModelLevelMms()
+  {
+      return $this->hasMany('RocketComponentModelLevelMm', 'rocketComponentModelMm_id');
+  }
+
+	// public function myRocketComponentModelCapacityLevelMms()
+  // {
+  //     return $this->myRocketComponentModelLevelMms()->where('parent', 0)->get();;
+  // }
+	//
+	// public function myRocketComponentModelRechargeRateLevelMms()
+  // {
+  //     return $this->hasMany('RocketComponentModelLevelMm', 'rocketComponentModelMm_id');
+  // }
 }

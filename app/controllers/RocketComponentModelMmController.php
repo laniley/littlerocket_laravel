@@ -104,12 +104,12 @@ class RocketComponentModelMmController extends \BaseController {
 		$rocketComponentModelMm->rocketComponent_id = Input::get('rocketComponentModelMm.rocketComponent_id');
 		$rocketComponentModelMm->rocketComponentModel_id = Input::get('rocketComponentModelMm.rocketComponentModel_id');
 
-		if(Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id') != null) {
-			$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelCapacityLevelMm_id');
+		if(Input::get('rocketComponentModelMm.selectedRocketComponentModelCapacityLevelMm_id') != null) {
+			$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.selectedRocketComponentModelCapacityLevelMm_id');
 		}
 
-		if(Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id') != null) {
-			$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.rocketComponentModelRechargeRateLevelMm_id');
+		if(Input::get('rocketComponentModelMm.selectedRocketComponentModelRechargeRateLevelMm_id') != null) {
+			$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.selectedRocketComponentModelRechargeRateLevelMm_id');
 		}
 
 		$rocketComponentModelMm->save();
@@ -132,6 +132,30 @@ class RocketComponentModelMmController extends \BaseController {
 
   private function prepareRocketComponentModelMm($rocketComponentModelMm)
 	{
+		$rocketComponentModelMm["selectedRocketComponentModelCapacityLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelCapacityLevelMm_id"];
+		$rocketComponentModelMm["selectedRocketComponentModelRechargeRateLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelRechargeRateLevelMm_id"];
+
+		$rocketComponentModelLevelMms = $rocketComponentModelMm->myRocketComponentModelLevelMms;
+		$modelMmIds = [];
+		foreach($rocketComponentModelLevelMms as $modelMm) {
+			array_push($modelMmIds, $modelMm->id);
+		}
+		$rocketComponentModelMm["rocketComponentModelLevelMms"] = $modelMmIds;
+
+		// $rocketComponentModelCapacityLevelMms = $rocketComponentModelMm->myRocketComponentModelCapacityLevelMms;
+		// $capacityModelMmIds = [];
+		// foreach($rocketComponentModelCapacityLevelMms as $modelMm) {
+		// 	array_push($capacityModelMmIds, $modelMm->id);
+		// }
+		// $rocketComponentModelMm["rocketComponentModelCapacityLevelMms"] = $capacityModelMmIds;
+		//
+		// $rocketComponentModelRechargeRateLevelMms = $rocketComponentModelMm->myRocketComponentModelRechargeRateLevelMms;
+		// $rechargeRateModelMmIds = [];
+		// foreach($rocketComponentModelRechargeRateLevelMms as $modelMm) {
+		// 	array_push($rechargeRateModelMmIds, $modelMm->id);
+		// }
+		// $rocketComponentModelMm["rocketComponentModelRechargeRateLevelMms"] = $rechargeRateModelMmIds;
+
 		return $rocketComponentModelMm;
 	}
 }
