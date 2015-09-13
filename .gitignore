@@ -1,5 +1,6 @@
 /bootstrap/compiled.php
 /app/database/csv
+/app/config/database.php
 .env.*.php
 .env.php
 .env
