@@ -27,12 +27,18 @@ class RocketComponentModelController extends \BaseController {
 			$rocketComponentModels = RocketComponentModel::all();
     }
 
+		$rocketComponentModelLevels = [];
+
     foreach ($rocketComponentModels as $rocketComponentModel)
 		{
 			$rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
+			$levels = $rocketComponentModel->levels;
+			foreach($levels as $level) {
+				array_push($rocketComponentModelLevels, $level);
+			}
 		}
 
-    return '{ "rocketComponentModels": '.$rocketComponentModels.' }';
+		return '{"rocketComponentModels":'.$rocketComponentModels.', "rocketComponentModelLevels": ['.implode($rocketComponentModelLevels, ',').']}';
 	}
 
 
@@ -68,7 +74,8 @@ class RocketComponentModelController extends \BaseController {
 	{
 		$rocketComponentModel = RocketComponentModel::findOrFail($id);
     $rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
-		return '{"rocketComponentModel":'.$rocketComponentModel.' }';
+		$rocketComponentModelLevels = $rocketComponentModel->levels;
+		return '{"rocketComponentModel":'.$rocketComponentModel.', "rocketComponentModelLevels": '.$rocketComponentModelLevels.'}';
 	}
 
 
@@ -115,6 +122,7 @@ class RocketComponentModelController extends \BaseController {
 			array_push($levelIds, $level->id);
 		}
 		$rocketComponentModel["rocketComponentModelLevels"] = $levelIds;
+
 		return $rocketComponentModel;
 	}
 }

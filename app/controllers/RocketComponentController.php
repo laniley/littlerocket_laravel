@@ -84,7 +84,13 @@ class RocketComponentController extends \BaseController {
 	{
 		$rocketComponent = RocketComponent::findOrFail($id);
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
-		return '{"rocketComponent":'.$rocketComponent.' }';
+		$rocketComponentModelMms = $rocketComponent->myRocketComponentModelMms;
+		foreach ($rocketComponentModelMms as $rocketComponentModelMm)
+		{
+			$rocketComponentModelMm["selectedRocketComponentModelCapacityLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelCapacityLevelMm_id"];
+			$rocketComponentModelMm["selectedRocketComponentModelRechargeRateLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelRechargeRateLevelMm_id"];
+		}
+		return '{"rocketComponent":'.$rocketComponent.', "rocketComponentModelMms": '.$rocketComponentModelMms.'}';
 	}
 
 

@@ -50,14 +50,4 @@ class RocketComponentModelMm extends Eloquent{
   {
       return $this->hasMany('RocketComponentModelLevelMm', 'rocketComponentModelMm_id');
   }
-
-	// public function myRocketComponentModelCapacityLevelMms()
-  // {
-  //     return $this->myRocketComponentModelLevelMms()->where('parent', 0)->get();;
-  // }
-	//
-	// public function myRocketComponentModelRechargeRateLevelMms()
-  // {
-  //     return $this->hasMany('RocketComponentModelLevelMm', 'rocketComponentModelMm_id');
-  // }
 }
