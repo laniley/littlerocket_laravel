@@ -34,6 +34,9 @@ class RocketComponentModelController extends \BaseController {
 			$rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
 			$levels = $rocketComponentModel->levels;
 			foreach($levels as $level) {
+				if($level->type == 'recharge_rate') {
+					$level->value = $level->value / 10;
+				}
 				array_push($rocketComponentModelLevels, $level);
 			}
 		}

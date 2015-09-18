@@ -85,12 +85,23 @@ class RocketComponentController extends \BaseController {
 		$rocketComponent = RocketComponent::findOrFail($id);
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
 		$rocketComponentModelMms = $rocketComponent->myRocketComponentModelMms;
+		$rocketComponentModelLevelMms = [];
+		$rocketComponentModelLevels = [];
 		foreach ($rocketComponentModelMms as $rocketComponentModelMm)
 		{
 			$rocketComponentModelMm["selectedRocketComponentModelCapacityLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelCapacityLevelMm_id"];
+			$rocketComponentModelCapacityLevelMm = RocketComponentModelLevelMm::findOrFail($rocketComponentModelMm["rocketComponentModelCapacityLevelMm_id"]);
+			array_push($rocketComponentModelLevelMms, $rocketComponentModelCapacityLevelMm);
+			$rocketComponentModelCapacityLevel = RocketComponentModelLevel::findOrFail($rocketComponentModelCapacityLevelMm["rocketComponentModelLevel_id"]);
+			array_push($rocketComponentModelLevels, $rocketComponentModelCapacityLevel);
 			$rocketComponentModelMm["selectedRocketComponentModelRechargeRateLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelRechargeRateLevelMm_id"];
+			$rocketComponentModelRechargeRateLevelMm = RocketComponentModelLevelMm::findOrFail($rocketComponentModelMm["rocketComponentModelRechargeRateLevelMm_id"]);
+			array_push($rocketComponentModelLevelMms, $rocketComponentModelRechargeRateLevelMm);
+			$rocketComponentModelRechargeRateLevel = RocketComponentModelLevel::findOrFail($rocketComponentModelRechargeRateLevelMm["rocketComponentModelLevel_id"]);
+			$rocketComponentModelRechargeRateLevel->value = $rocketComponentModelRechargeRateLevel->value / 10;
+			array_push($rocketComponentModelLevels, $rocketComponentModelRechargeRateLevel);
 		}
-		return '{"rocketComponent":'.$rocketComponent.', "rocketComponentModelMms": '.$rocketComponentModelMms.'}';
+		return '{"rocketComponent":'.$rocketComponent.', "rocketComponentModelMms": '.$rocketComponentModelMms.', "rocketComponentModelLevelMms": ['.implode($rocketComponentModelLevelMms, ',').'], "rocketComponentModelLevels": ['.implode($rocketComponentModelLevels, ',').']}';
 	}
 
 
