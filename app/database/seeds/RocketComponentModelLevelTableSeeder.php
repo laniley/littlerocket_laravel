@@ -19,8 +19,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'capacity',
           'level' => 1,
-          'costs' => 500,
-          'construction_time' => 120,
+          'costs' => 0,
+          'construction_time' => 0,
           'value' => 3,
           'rocketComponentModel_id' => 1
         ));
@@ -28,8 +28,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'capacity',
           'level' => 2,
-          'costs' => 750,
-          'construction_time' => 240,
+          'costs' => 150,
+          'construction_time' => 120,
           'value' => 4,
           'rocketComponentModel_id' => 1
         ));
@@ -37,8 +37,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'capacity',
           'level' => 3,
-          'costs' => 1000,
-          'construction_time' => 480,
+          'costs' => 200,
+          'construction_time' => 240,
           'value' => 5,
           'rocketComponentModel_id' => 1
         ));
@@ -47,8 +47,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'recharge_rate',
           'level' => 1,
-          'costs' => 500,
-          'construction_time' => 120,
+          'costs' => 0,
+          'construction_time' => 0,
           'value' => 1,
           'rocketComponentModel_id' => 1
         ));
@@ -56,8 +56,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'recharge_rate',
           'level' => 2,
-          'costs' => 750,
-          'construction_time' => 240,
+          'costs' => 150,
+          'construction_time' => 120,
           'value' => 2,
           'rocketComponentModel_id' => 1
         ));
@@ -65,8 +65,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         RocketComponentModelLevel::create(array(
           'type' => 'recharge_rate',
           'level' => 3,
-          'costs' => 1000,
-          'construction_time' => 480,
+          'costs' => 200,
+          'construction_time' => 240,
           'value' => 3,
           'rocketComponentModel_id' => 1
         ));
@@ -76,8 +76,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 1,
-        'costs' => 500,
-        'construction_time' => 120,
+        'costs' => 0,
+        'construction_time' => 0,
         'value' => 6,
         'rocketComponentModel_id' => 2
       ));
@@ -85,7 +85,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 2,
-        'costs' => 750,
+        'costs' => 500,
         'construction_time' => 240,
         'value' => 8,
         'rocketComponentModel_id' => 2
@@ -94,7 +94,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 3,
-        'costs' => 1000,
+        'costs' => 750,
         'construction_time' => 480,
         'value' => 10,
         'rocketComponentModel_id' => 2
@@ -104,8 +104,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 1,
-        'costs' => 500,
-        'construction_time' => 120,
+        'costs' => 0,
+        'construction_time' => 0,
         'value' => 4,
         'rocketComponentModel_id' => 2
       ));
@@ -113,7 +113,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 2,
-        'costs' => 750,
+        'costs' => 500,
         'construction_time' => 240,
         'value' => 5,
         'rocketComponentModel_id' => 2
@@ -122,7 +122,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 3,
-        'costs' => 1000,
+        'costs' => 750,
         'construction_time' => 480,
         'value' => 6,
         'rocketComponentModel_id' => 2
@@ -133,8 +133,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 12,
       'rocketComponentModel_id' => 3
     ));
@@ -143,7 +143,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 480,
       'value' => 15,
       'rocketComponentModel_id' => 3
     ));
@@ -152,7 +152,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 960,
       'value' => 20,
       'rocketComponentModel_id' => 3
     ));
@@ -161,8 +161,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 7,
       'rocketComponentModel_id' => 3
     ));
@@ -171,7 +171,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 480,
       'value' => 8,
       'rocketComponentModel_id' => 3
     ));
@@ -180,7 +180,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 960,
       'value' => 9,
       'rocketComponentModel_id' => 3
     ));
@@ -191,8 +191,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 1,
-        'costs' => 500,
-        'construction_time' => 120,
+        'costs' => 0,
+        'construction_time' => 0,
         'value' => 3,
         'rocketComponentModel_id' => 4
       ));
@@ -200,7 +200,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 2,
-        'costs' => 750,
+        'costs' => 250,
         'construction_time' => 240,
         'value' => 4,
         'rocketComponentModel_id' => 4
@@ -209,7 +209,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
         'level' => 3,
-        'costs' => 1000,
+        'costs' => 500,
         'construction_time' => 480,
         'value' => 5,
         'rocketComponentModel_id' => 4
@@ -219,8 +219,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 1,
-        'costs' => 500,
-        'construction_time' => 120,
+        'costs' => 0,
+        'construction_time' => 0,
         'value' => 1,
         'rocketComponentModel_id' => 4
       ));
@@ -228,7 +228,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 2,
-        'costs' => 750,
+        'costs' => 250,
         'construction_time' => 240,
         'value' => 2,
         'rocketComponentModel_id' => 4
@@ -237,7 +237,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       RocketComponentModelLevel::create(array(
         'type' => 'recharge_rate',
         'level' => 3,
-        'costs' => 1000,
+        'costs' => 500,
         'construction_time' => 480,
         'value' => 3,
         'rocketComponentModel_id' => 4
@@ -248,8 +248,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 3,
       'rocketComponentModel_id' => 5
     ));
@@ -257,8 +257,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 500,
+      'construction_time' => 480,
       'value' => 4,
       'rocketComponentModel_id' => 5
     ));
@@ -266,8 +266,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 750,
+      'construction_time' => 960,
       'value' => 5,
       'rocketComponentModel_id' => 5
     ));
@@ -276,8 +276,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 1,
       'rocketComponentModel_id' => 5
     ));
@@ -285,8 +285,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 500,
+      'construction_time' => 480,
       'value' => 2,
       'rocketComponentModel_id' => 5
     ));
@@ -294,8 +294,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 750,
+      'construction_time' => 960,
       'value' => 3,
       'rocketComponentModel_id' => 5
     ));
@@ -305,8 +305,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 3,
       'rocketComponentModel_id' => 6
     ));
@@ -315,7 +315,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 960,
       'value' => 4,
       'rocketComponentModel_id' => 6
     ));
@@ -324,7 +324,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 1920,
       'value' => 5,
       'rocketComponentModel_id' => 6
     ));
@@ -333,8 +333,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 1,
       'rocketComponentModel_id' => 6
     ));
@@ -343,7 +343,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 960,
       'value' => 2,
       'rocketComponentModel_id' => 6
     ));
@@ -352,7 +352,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 1920,
       'value' => 3,
       'rocketComponentModel_id' => 6
     ));
@@ -363,8 +363,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 3,
       'rocketComponentModel_id' => 7
     ));
@@ -373,7 +373,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 960,
       'value' => 4,
       'rocketComponentModel_id' => 7
     ));
@@ -382,7 +382,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'capacity',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 1920,
       'value' => 5,
       'rocketComponentModel_id' => 7
     ));
@@ -391,8 +391,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 1,
       'rocketComponentModel_id' => 7
     ));
@@ -401,7 +401,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 2,
       'costs' => 750,
-      'construction_time' => 240,
+      'construction_time' => 960,
       'value' => 2,
       'rocketComponentModel_id' => 7
     ));
@@ -410,7 +410,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
       'type' => 'recharge_rate',
       'level' => 3,
       'costs' => 1000,
-      'construction_time' => 480,
+      'construction_time' => 1920,
       'value' => 3,
       'rocketComponentModel_id' => 7
     ));
@@ -420,8 +420,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 3,
       'rocketComponentModel_id' => 8
     ));
@@ -429,8 +429,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 1000,
+      'construction_time' => 1920,
       'value' => 4,
       'rocketComponentModel_id' => 8
     ));
@@ -438,8 +438,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 1500,
+      'construction_time' => 3840,
       'value' => 5,
       'rocketComponentModel_id' => 8
     ));
@@ -448,8 +448,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 1,
       'rocketComponentModel_id' => 8
     ));
@@ -457,8 +457,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 1000,
+      'construction_time' => 1920,
       'value' => 2,
       'rocketComponentModel_id' => 8
     ));
@@ -466,8 +466,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 1500,
+      'construction_time' => 3840,
       'value' => 3,
       'rocketComponentModel_id' => 8
     ));
@@ -477,8 +477,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 3,
       'rocketComponentModel_id' => 9
     ));
@@ -486,8 +486,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 1500,
+      'construction_time' => 3840,
       'value' => 4,
       'rocketComponentModel_id' => 9
     ));
@@ -495,8 +495,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 2000,
+      'construction_time' => 7680,
       'value' => 5,
       'rocketComponentModel_id' => 9
     ));
@@ -505,8 +505,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 1,
-      'costs' => 500,
-      'construction_time' => 120,
+      'costs' => 0,
+      'construction_time' => 0,
       'value' => 1,
       'rocketComponentModel_id' => 9
     ));
@@ -514,8 +514,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 2,
-      'costs' => 750,
-      'construction_time' => 240,
+      'costs' => 1500,
+      'construction_time' => 3840,
       'value' => 2,
       'rocketComponentModel_id' => 9
     ));
@@ -523,8 +523,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
     RocketComponentModelLevel::create(array(
       'type' => 'recharge_rate',
       'level' => 3,
-      'costs' => 1000,
-      'construction_time' => 480,
+      'costs' => 2000,
+      'construction_time' => 7680,
       'value' => 3,
       'rocketComponentModel_id' => 9
     ));

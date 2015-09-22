@@ -12,67 +12,67 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
   public function run() {
 
     DB::table($this->table)->truncate();
-
+    // Canon
     RocketComponentModel::create(array(
       'type' => 'canon',
       'model' => 1,
-      'costs' => 500,
-      'construction_time' => 120
+      'costs' => 0,
+      'construction_time' => 0
     ));
 
     RocketComponentModel::create(array(
       'type' => 'canon',
       'model' => 2,
-      'costs' => 750,
+      'costs' => 1000,
       'construction_time' => 600
     ));
 
     RocketComponentModel::create(array(
       'type' => 'canon',
       'model' => 3,
-      'costs' => 1000,
+      'costs' => 2000,
       'construction_time' => 1200
     ));
-
+    // Shield
     RocketComponentModel::create(array(
       'type' => 'shield',
       'model' => 1,
-      'costs' => 500,
-      'construction_time' => 1200
+      'costs' => 0,
+      'construction_time' => 0
     ));
 
     RocketComponentModel::create(array(
       'type' => 'shield',
       'model' => 2,
-      'costs' => 750,
+      'costs' => 2000,
       'construction_time' => 2400
     ));
 
     RocketComponentModel::create(array(
       'type' => 'shield',
       'model' => 3,
-      'costs' => 1000,
+      'costs' => 2500,
       'construction_time' => 4800
     ));
-
+    // Engine
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 1,
-      'costs' => 500,
-      'construction_time' => 12000
+      'costs' => 0,
+      'construction_time' => 0
     ));
 
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 2,
-      'costs' => 750,
+      'costs' => 2500,
       'construction_time' => 24000
     ));
 
     RocketComponentModel::create(array(
       'type' => 'engine',
       'model' => 3,
-      'costs' => 1000,
+      'costs' => 3000,
       'construction_time' => 48000
     ));
   }
