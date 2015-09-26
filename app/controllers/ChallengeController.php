@@ -1,6 +1,6 @@
 <?php
 
-class LabController extends \BaseController {
+class ChallengeController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,15 +9,7 @@ class LabController extends \BaseController {
 	 */
 	public function index()
 	{
-		if(Input::has('user')) {
-
-      $user = User::find(Input::get('user'));
-
-		  return '{ "labs": ['.$user->lab.'] }';
-	  }
-	  else {
-			$labs = Lab::all();
-		}
+		//
 	}
 
 
@@ -39,15 +31,13 @@ class LabController extends \BaseController {
 	 */
 	public function store()
 	{
-		$lab = Lab::firstOrCreate(array(
-			 'user_id' => Input::get('lab.user_id'),
-			 'costs' => Input::get('lab.costs'),
-			 'construction_time' => Input::get('lab.construction_time'),
-			 'construction_start' => Input::get('lab.construction_start'),
-			 'status' => Input::get('lab.status')
+		$challenge = Challenge::firstOrCreate(array(
+			 'fb_request_id' => Input::get('challenge.fb_request_id'),
+			 'from_player_id' => Input::get('challenge.from_player_id'),
+			 'to_player_id' => Input::get('challenge.to_player_id'),
 		));
 
-	  return '{"lab":'.$lab.' }';
+	  return '{"challenge":'.$challenge.' }';
 	}
 
 
@@ -59,8 +49,8 @@ class LabController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$lab = Lab::findOrFail($id);
-		return '{"lab":'.$lab.' }';
+		$challenge = Challenge::findOrFail($id);
+		return '{"challenge":'.$challenge.' }';
 	}
 
 
@@ -84,14 +74,7 @@ class LabController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$lab = Lab::findOrFail($id);
-
-    $lab->construction_start = Input::get('lab.construction_start');
-		$lab->status = Input::get('lab.status');
-
-		$lab->save();
-
-	  return '{"lab":'.$lab.' }';
+		//
 	}
 
 

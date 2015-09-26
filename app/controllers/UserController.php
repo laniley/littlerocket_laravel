@@ -91,7 +91,9 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-	  //
+		$user = User::findOrFail($id);
+		$user = $this->prepareUser($user);
+		return '{"user":'.$user.' }';
 	}
 
 
@@ -161,6 +163,19 @@ class UserController extends \BaseController {
 			if($user->rocket) {
 					$user->rocket_id = $user->rocket->id;
 			}
+
+			if($user->challenges) {
+					$user->rocket_id = $user->rocket->id;
+			}
+
+			$challenges = Challenge::ofUser($user)->get();
+
+			// $challenges = $user->challenges;
+			$challengesIds = [];
+			foreach($challenges as $challenge) {
+				array_push($challengesIds, $challenge->id);
+			}
+			$user["challenges"] = $challengesIds;
 		}
 
 		return $user;

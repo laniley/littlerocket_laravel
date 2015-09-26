@@ -31,6 +31,7 @@ return array(
     'ClassPreloader\\Parser\\DirVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/DirVisitor.php',
     'ClassPreloader\\Parser\\FileVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
+    'CreateChallengesTable' => $baseDir . '/app/database/migrations/2015_09_22_185335_create_challenges_table.php',
     'CreateLabsTable' => $baseDir . '/app/database/migrations/2015_08_12_175414_create_labs_table.php',
     'CreateRocketComponentModelLevelMmTable' => $baseDir . '/app/database/migrations/2015_08_12_190910_create_rocket_component_model_level_mm_table.php',
     'CreateRocketComponentModelLevelsTable' => $baseDir . '/app/database/migrations/2015_08_12_190900_create_rocket_component_model_levels_table.php',
