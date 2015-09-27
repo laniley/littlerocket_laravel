@@ -77,8 +77,6 @@ class ChallengeController extends \BaseController {
 		$challenge = Challenge::findOrFail($id);
 		$challenge->from_player_score = Input::get('challenge.from_player_score');
 		$challenge->to_player_score = Input::get('challenge.to_player_score');
-		$challenge->from_player_has_played = Input::get('challenge.from_player_has_played');
-		$challenge->to_player_has_played = Input::get('challenge.to_player_has_played');
 		$challenge->save();
 		return '{"challenge":'.$challenge.' }';
 	}
