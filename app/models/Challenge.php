@@ -33,4 +33,17 @@ class Challenge extends Eloquent{
 	  $query = $query->where('from_player_id', $user->id)->orWhere('to_player_id', $user->id);
 		return $query;
 	}
+
+	public function scopeWonByUser($query, $user)
+	{
+		$query = $query->where(function($query) {
+												$query->where('from_player_id', $user->id)
+															->where('from_player_score', ' > ', 'to_player_score');
+										})
+									 ->orWhere(function($query) {
+							 					$query->where('to_player_id', $user->id)
+							 								->where('to_player_score', ' > ', 'from_player_score');
+										});
+		return $query;
+	}
 }

@@ -18,11 +18,18 @@ class UserController extends \BaseController {
 
 		  return '{ "users": ['.$user.'] }';
 	  }
-		else if(Input::has('mode') && Input::has('mode') == "leaderboard") {
+		else if(Input::has('mode') && Input::get('mode') == "leaderboard") {
 
-			$users = User::orderByRankDesc()
-								->take(50)
-								->get();
+			if(Input::get('type') == "score") {
+				$users = User::orderByRankDesc()
+									->take(50)
+									->get();
+			}
+			else if(Input::get('type') == "challenges") {
+				$users = User::orderByChallengesRankDesc()
+									->take(50)
+									->get();
+			}
 
 			foreach ($users as $user)
 			{
@@ -155,6 +162,7 @@ class UserController extends \BaseController {
 	{
 		if($user) {
 			$user->rank = $user->rank();
+			$user->rank_by_won_challenges = $user->rankByWonChallenges();
 
 			if($user->lab) {
 					$user->lab_id = $user->lab->id;
@@ -170,7 +178,6 @@ class UserController extends \BaseController {
 
 			$challenges = Challenge::ofUser($user)->get();
 
-			// $challenges = $user->challenges;
 			$challengesIds = [];
 			foreach($challenges as $challenge) {
 				array_push($challengesIds, $challenge->id);
