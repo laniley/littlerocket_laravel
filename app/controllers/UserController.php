@@ -11,11 +11,11 @@ class UserController extends \BaseController {
 	{
 	  if(Input::has('fb_id')) {
 	   	$fb_id = Input::get('fb_id');
-
 			$user = User::where('fb_id', '=', $fb_id)->first();
-
-			$user = $this->prepareUser($user);
-
+			if($user != null) {
+				$user = $this->prepareUser($user);
+				$user->rank_by_won_challenges = $user->rankByWonChallenges();
+			}
 		  return '{ "users": ['.$user.'] }';
 	  }
 		else if(Input::has('mode') && Input::get('mode') == "leaderboard") {
@@ -24,16 +24,22 @@ class UserController extends \BaseController {
 				$users = User::orderByRankDesc()
 									->take(50)
 									->get();
+
+				foreach ($users as $user)
+				{
+					$user = $this->prepareUser($user);
+				}
 			}
 			else if(Input::get('type') == "challenges") {
 				$users = User::orderByChallengesRankDesc()
 									->take(50)
 									->get();
-			}
 
-			foreach ($users as $user)
-			{
-				$user = $this->prepareUser($user);
+				foreach ($users as $user)
+				{
+					$user->rank_by_won_challenges = $user->rankByWonChallenges();
+					$user = $this->prepareUser($user);
+				}
 			}
 
 		  return '{ "users": '.$users.' }';
@@ -85,6 +91,7 @@ class UserController extends \BaseController {
 		$user->save();
 
 		$user = $this->prepareUser($user);
+		$user->rank_by_won_challenges = $user->rankByWonChallenges();
 
 	  return '{"user":'.$user.' }';
 	}
@@ -100,6 +107,7 @@ class UserController extends \BaseController {
 	{
 		$user = User::findOrFail($id);
 		$user = $this->prepareUser($user);
+		$user->rank_by_won_challenges = $user->rankByWonChallenges();
 		return '{"user":'.$user.' }';
 	}
 
@@ -137,6 +145,7 @@ class UserController extends \BaseController {
 		$user->save();
 
 		$user = $this->prepareUser($user);
+		$user->rank_by_won_challenges = $user->rankByWonChallenges();
 
 		$userResponse = array(
 			'id' => $user->id,
@@ -162,7 +171,7 @@ class UserController extends \BaseController {
 	{
 		if($user) {
 			$user->rank = $user->rank();
-			$user->rank_by_won_challenges = $user->rankByWonChallenges();
+			// $user->rank_by_won_challenges = $user->rankByWonChallenges();
 
 			if($user->lab) {
 					$user->lab_id = $user->lab->id;
