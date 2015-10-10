@@ -12,23 +12,23 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
   public function run() {
 
     DB::table($this->table)->truncate();
-    // Canon
+    // Cannon
     RocketComponentModel::create(array(
-      'type' => 'canon',
+      'type' => 'cannon',
       'model' => 1,
       'costs' => 0,
       'construction_time' => 0
     ));
 
     RocketComponentModel::create(array(
-      'type' => 'canon',
+      'type' => 'cannon',
       'model' => 2,
       'costs' => 1000,
       'construction_time' => 600
     ));
 
     RocketComponentModel::create(array(
-      'type' => 'canon',
+      'type' => 'cannon',
       'model' => 3,
       'costs' => 2000,
       'construction_time' => 1200

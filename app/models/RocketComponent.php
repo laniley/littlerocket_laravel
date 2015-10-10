@@ -32,9 +32,9 @@ class RocketComponent extends Eloquent{
 			return $this->hasMany('RocketComponentModelMm', 'rocketComponent_id');
 	}
 
-	public function scopeCanons($query)
+	public function scopeCannons($query)
   {
-			return $query->where('type', '=', 'canon');
+			return $query->where('type', '=', 'cannon');
   }
 
   public function scopeShields($query)

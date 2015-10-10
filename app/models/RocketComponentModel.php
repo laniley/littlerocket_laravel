@@ -21,9 +21,9 @@ class RocketComponentModel extends Eloquent{
       return $this->hasMany('RocketComponentModelLevel', 'rocketComponentModel_id');
   }
 
-	public function scopeCanons($query)
+	public function scopeCannons($query)
   {
-			return $query->where('type', '=', 'canon');
+			return $query->where('type', '=', 'cannon');
   }
 
   public function scopeShields($query)

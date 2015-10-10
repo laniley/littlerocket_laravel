@@ -93,9 +93,9 @@ class RocketController extends \BaseController {
 			 'user_id' => Input::get('rocket.user_id')
 		));
 
-		$canon = RocketComponent::where(array(
-			'id' => Input::get('rocket.canon_id'),
-			'type' => 'canon'
+		$cannon = RocketComponent::where(array(
+			'id' => Input::get('rocket.cannon_id'),
+			'type' => 'cannon'
 		))->first();
 
 		$shield = RocketComponent::where(array(
@@ -108,7 +108,7 @@ class RocketController extends \BaseController {
 			'type' => 'engine'
 		))->first();
 
-		$rocket->canon()->associate($canon);
+		$rocket->cannon()->associate($cannon);
 		$rocket->shield()->associate($shield);
 		$rocket->engine()->associate($engine);
 
@@ -135,12 +135,12 @@ class RocketController extends \BaseController {
 	{
 		if($rocket) {
 
-			$canon = RocketComponent::canons()->where('rocket_id', $rocket->id)->first();
+			$cannon = RocketComponent::cannons()->where('rocket_id', $rocket->id)->first();
 			$shield = RocketComponent::shields()->where('rocket_id', $rocket->id)->first();
 			$engine = RocketComponent::engines()->where('rocket_id', $rocket->id)->first();
 
-			if($canon) {
-					$rocket->canon_id = $canon->id;
+			if($cannon) {
+					$rocket->cannon_id = $cannon->id;
 			}
 
 	    if($shield) {

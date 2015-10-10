@@ -13,8 +13,8 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
 
     DB::table($this->table)->truncate();
 
-    // Canon-Models (1, 2, 3)
-      // Canon-Model 1
+    // Cannon-Models (1, 2, 3)
+      // Cannon-Model 1
         // Capacity-Levels
         RocketComponentModelLevel::create(array(
           'type' => 'capacity',
@@ -71,7 +71,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
           'rocketComponentModel_id' => 1
         ));
 
-    // Canon-Model 2
+    // Cannon-Model 2
       // Capacity-Levels
       RocketComponentModelLevel::create(array(
         'type' => 'capacity',
@@ -128,7 +128,7 @@ class RocketComponentModelLevelTableSeeder extends BaseSeeder {
         'rocketComponentModel_id' => 2
       ));
 
-  // Canon-Model 3
+  // Cannon-Model 3
     // Capacity-Levels
     RocketComponentModelLevel::create(array(
       'type' => 'capacity',

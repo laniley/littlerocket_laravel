@@ -16,9 +16,9 @@ class RocketComponentModelLevel extends Eloquent{
 	 */
 	protected $hidden = array('created_at', 'updated_at');
 
-	public function scopeCanons($query)
+	public function scopeCannons($query)
   {
-			return $query->where('type', '=', 'canon');
+			return $query->where('type', '=', 'cannon');
   }
 
   public function scopeShields($query)
