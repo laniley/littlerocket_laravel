@@ -26,18 +26,7 @@ class RocketComponentModelMmController extends \BaseController {
 			$rocketComponentModelMms = RocketComponentModelMm::all();
     }
 
-		$rocketComponentModelLevelMms = [];
-
-    foreach ($rocketComponentModelMms as $rocketComponentModelMm)
-		{
-			$rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
-			$levelMms = $rocketComponentModelMm->myRocketComponentModelLevelMms;
-			foreach($levelMms as $levelMm) {
-				array_push($rocketComponentModelLevelMms, $levelMm);
-			}
-		}
-
-    return '{ "rocketComponentModelMms": '.$rocketComponentModelMms.', "rocketComponentModelLevelMms": ['.implode($rocketComponentModelLevelMms, ',').']}';
+    return '{ "rocketComponentModelMms": '.$rocketComponentModelMms.'}';
 	}
 
 
@@ -65,7 +54,6 @@ class RocketComponentModelMmController extends \BaseController {
 		));
 		$rocketComponentModelMm->status = Input::get('rocketComponentModelMm.status');
 		$rocketComponentModelMm->save();
-    $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
 	  return '{"rocketComponentModelMm":'.$rocketComponentModelMm.' }';
 	}
 
@@ -79,9 +67,7 @@ class RocketComponentModelMmController extends \BaseController {
 	public function show($id)
 	{
 		$rocketComponentModelMm = RocketComponentModelMm::findOrFail($id);
-    $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
-		$rocketComponentModelLevelMms = $rocketComponentModelMm->myRocketComponentModelLevelMms;
-		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.', "rocketComponentModelLevelMms": '.$rocketComponentModelLevelMms.'}';
+		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.'}';
 	}
 
 
@@ -108,22 +94,14 @@ class RocketComponentModelMmController extends \BaseController {
 		$rocketComponentModelMm = RocketComponentModelMm::findOrFail($id);
 		$rocketComponentModelMm->construction_start = Input::get('rocketComponentModelMm.construction_start');
 		$rocketComponentModelMm->status = Input::get('rocketComponentModelMm.status');
+		$rocketComponentModelMm->capacity = Input::get('rocketComponentModelMm.capacity');
+		$rocketComponentModelMm->recharge_rate = Input::get('rocketComponentModelMm.recharge_rate');
 		$rocketComponentModelMm->rocketComponent_id = Input::get('rocketComponentModelMm.rocketComponent_id');
 		$rocketComponentModelMm->rocketComponentModel_id = Input::get('rocketComponentModelMm.rocketComponentModel_id');
 
-		if(Input::get('rocketComponentModelMm.selectedRocketComponentModelCapacityLevelMm_id') != null) {
-			$rocketComponentModelMm->rocketComponentModelCapacityLevelMm_id = Input::get('rocketComponentModelMm.selectedRocketComponentModelCapacityLevelMm_id');
-		}
-
-		if(Input::get('rocketComponentModelMm.selectedRocketComponentModelRechargeRateLevelMm_id') != null) {
-			$rocketComponentModelMm->rocketComponentModelRechargeRateLevelMm_id = Input::get('rocketComponentModelMm.selectedRocketComponentModelRechargeRateLevelMm_id');
-		}
-
 		$rocketComponentModelMm->save();
 
-    $rocketComponentModelMm = $this->prepareRocketComponentModelMm($rocketComponentModelMm);
-		$rocketComponentModelLevelMms = $rocketComponentModelMm->myRocketComponentModelLevelMms;
-		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.', "rocketComponentModelLevelMms": '.$rocketComponentModelLevelMms.'}';
+		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.'}';
 	}
 
 
@@ -136,20 +114,5 @@ class RocketComponentModelMmController extends \BaseController {
 	public function destroy($id)
 	{
 		//
-	}
-
-  private function prepareRocketComponentModelMm($rocketComponentModelMm)
-	{
-		$rocketComponentModelMm["selectedRocketComponentModelCapacityLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelCapacityLevelMm_id"];
-		$rocketComponentModelMm["selectedRocketComponentModelRechargeRateLevelMm_id"] = $rocketComponentModelMm["rocketComponentModelRechargeRateLevelMm_id"];
-
-		$rocketComponentModelLevelMms = $rocketComponentModelMm->myRocketComponentModelLevelMms;
-		$modelMmIds = [];
-		foreach($rocketComponentModelLevelMms as $modelMm) {
-			array_push($modelMmIds, $modelMm->id);
-		}
-		$rocketComponentModelMm["rocketComponentModelLevelMms"] = $modelMmIds;
-
-		return $rocketComponentModelMm;
 	}
 }

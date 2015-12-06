@@ -20,8 +20,8 @@ class CreateRocketComponentModelMmTable extends Migration {
 
 		  $table->integer('rocketComponent_id')->unsigned();
 			$table->integer('rocketComponentModel_id')->unsigned();
-			$table->integer('rocketComponentModelCapacityLevelMm_id')->unsigned()->nullable();
-			$table->integer('rocketComponentModelRechargeRateLevelMm_id')->unsigned()->nullable();
+			$table->integer('capacity')->unsigned()->default(3);
+			$table->integer('recharge_rate')->unsigned()->default(1);
 
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

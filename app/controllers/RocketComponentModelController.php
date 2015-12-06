@@ -27,21 +27,7 @@ class RocketComponentModelController extends \BaseController {
 			$rocketComponentModels = RocketComponentModel::all();
     }
 
-		$rocketComponentModelLevels = [];
-
-    foreach ($rocketComponentModels as $rocketComponentModel)
-		{
-			$rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
-			$levels = $rocketComponentModel->levels;
-			foreach($levels as $level) {
-				if($level->type == 'recharge_rate') {
-					$level->value = $level->value / 10;
-				}
-				array_push($rocketComponentModelLevels, $level);
-			}
-		}
-
-		return '{"rocketComponentModels":'.$rocketComponentModels.', "rocketComponentModelLevels": ['.implode($rocketComponentModelLevels, ',').']}';
+		return '{"rocketComponentModels":'.$rocketComponentModels.'}';
 	}
 
 
@@ -76,9 +62,7 @@ class RocketComponentModelController extends \BaseController {
 	public function show($id)
 	{
 		$rocketComponentModel = RocketComponentModel::findOrFail($id);
-    $rocketComponentModel = $this->prepareRocketComponentModel($rocketComponentModel);
-		$rocketComponentModelLevels = $rocketComponentModel->levels;
-		return '{"rocketComponentModel":'.$rocketComponentModel.', "rocketComponentModelLevels": '.$rocketComponentModelLevels.'}';
+		return '{"rocketComponentModel":'.$rocketComponentModel.'}';
 	}
 
 
@@ -115,17 +99,5 @@ class RocketComponentModelController extends \BaseController {
 	public function destroy($id)
 	{
 		//
-	}
-
-  private function prepareRocketComponentModel($rocketComponentModel)
-	{
-		$levels = $rocketComponentModel->levels;
-		$levelIds = [];
-		foreach($levels as $level) {
-			array_push($levelIds, $level->id);
-		}
-		$rocketComponentModel["rocketComponentModelLevels"] = $levelIds;
-
-		return $rocketComponentModel;
 	}
 }

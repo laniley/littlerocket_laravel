@@ -16,8 +16,6 @@ class AddForeignKeysToRocketComponentModelMmTable extends Migration {
 		{
 			$table->foreign('rocketComponent_id', 'comp_model_mm_comp_foreign')->references('id')->on('rocket_components');
 			$table->foreign('rocketComponentModel_id', 'comp_model_mm_comp_model_foreign')->references('id')->on('rocket_component_models');
-			$table->foreign('rocketComponentModelCapacityLevelMm_id', 'comp_model_mm_cap_foreign')->references('id')->on('rocket_component_model_level_mm');
-			$table->foreign('rocketComponentModelRechargeRateLevelMm_id', 'comp_model_mm_recharge_foreign')->references('id')->on('rocket_component_model_level_mm');
 		});
 	}
 
@@ -32,8 +30,6 @@ class AddForeignKeysToRocketComponentModelMmTable extends Migration {
 		{
 			$table->dropForeign('comp_model_mm_comp_foreign');
 			$table->dropForeign('comp_model_mm_comp_model_foreign');
-			$table->dropForeign('comp_model_mm_cap_foreign');
-			$table->dropForeign('comp_model_mm_recharge_foreign');
 		});
 	}
 
