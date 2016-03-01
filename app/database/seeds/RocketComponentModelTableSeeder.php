@@ -18,7 +18,7 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
       'model' => 1,
       'costs' => 0,
       'construction_time' => 0,
-      'description' => 'This is the standard cannon. It shoots 1 bullet at a time.',
+      'description' => 'This is the default cannon. It shoots 1 bullet at a time.',
       'is_active' => 1
     ));
 
@@ -54,7 +54,7 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
       'model' => 1,
       'costs' => 0,
       'construction_time' => 0,
-      'description' => 'This is the standard shield.',
+      'description' => 'This is the default shield.',
       'is_active' => 1
     ));
 
@@ -81,7 +81,7 @@ class RocketComponentModelTableSeeder extends BaseSeeder {
       'model' => 1,
       'costs' => 0,
       'construction_time' => 0,
-      'description' => 'This is the standard engine.',
+      'description' => 'This is the default engine.',
       'is_active' => 1
     ));
 

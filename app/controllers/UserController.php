@@ -7,74 +7,46 @@ class UserController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-	  if(Input::has('fb_id')) {
-	   	$fb_id = Input::get('fb_id');
-			$user = User::where('fb_id', '=', $fb_id)->first();
-			if($user != null) {
-				$user = $this->prepareUser($user);
-				$user->rank_by_won_challenges = $user->rankByWonChallenges();
-			}
-		  return '{ "users": ['.$user.'] }';
-	  }
-		else if(Input::has('mode') && Input::get('mode') == "leaderboard") {
+	public function index() {
 
-			if(Input::get('type') == "score") {
-				$users = User::orderByRankDesc()
-									->take(50)
-									->get();
+		$fb_id = Input::get('fb_id');
+		$mode = Input::get('mode');
+		$type = Input::get('type');
 
-				foreach ($users as $user)
-				{
-					$user = $this->prepareUser($user);
-				}
-			}
-			else if(Input::get('type') == "challenges") {
-				$users = User::orderByChallengesRankDesc()
-									->take(50)
-									->get();
+		$users = new User();
 
-				foreach ($users as $user)
-				{
-					$user->rank_by_won_challenges = $user->rankByWonChallenges();
-					$user = $this->prepareUser($user);
-				}
-			}
-
-		  return '{ "users": '.$users.' }';
-	  }
-	  else {
-			$users = User::all();
-
-			foreach ($users as $user)
-			{
-				$user = $this->prepareUser($user);
-			}
-
-			return '{ "users": '.$users.' }';
+		if(isset($fb_id)) {
+			$users = $users->where('fb_id', $fb_id);
 		}
+	  else if(isset($mode) && $mode == "leaderboard") {
+			if(isset($type) && $type == "score") {
+				$users = $users -> orderByRankDesc()
+									      -> take(50);
+			}
+			else if(isset($type) && $type == "challenges") {
+				$users = $users -> orderByChallengesRankDesc()
+									      -> take(50);
+			}
+	  }
+
+		$users = $users->get();
+
+		// foreach ($users as $user) {
+		// 	$user = $this->prepareUser($user);
+		// 	// if(isset($fb_id)) {
+		// 	// 	$user->rank_by_won_challenges = $user->rankByWonChallenges();
+		// 	// }
+		// }
+
+		return '{ "users": '.$users.' }';
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store() {
 		$user = User::firstOrCreate(array(
 		 'fb_id' => Input::get('user.fb_id')
 		));
@@ -88,41 +60,20 @@ class UserController extends \BaseController {
 		$user->stars = Input::get('user.stars');
 		$user->reached_level = Input::get('user.reached_level');
 
+		$user->rank = DB::table('users')->count() + 1;
+
 		$user->save();
 
-		$user = $this->prepareUser($user);
-		$user->rank_by_won_challenges = $user->rankByWonChallenges();
+		// $id = $user->id;
+		//
+		// $this->updateRanks();
+		//
+		// $user = User::findOrFail($id);
+
+		// $user->rank_by_won_challenges = $user->rankByWonChallenges();
 
 	  return '{"user":'.$user.' }';
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$user = User::findOrFail($id);
-		$user = $this->prepareUser($user);
-		$user->rank_by_won_challenges = $user->rankByWonChallenges();
-		return '{"user":'.$user.' }';
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -130,8 +81,7 @@ class UserController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
+	public function update($id) {
 		$user = User::findOrFail($id);
 		$user->email = Input::get('user.email');
 		$user->img_url = Input::get('user.img_url');
@@ -144,57 +94,39 @@ class UserController extends \BaseController {
 
 		$user->save();
 
-		$user = $this->prepareUser($user);
-		$user->rank_by_won_challenges = $user->rankByWonChallenges();
+		$this->updateRanks();
 
-		$userResponse = array(
-			'id' => $user->id,
-			'rank' => $user->rank
-		);
+		$user = User::findOrFail($id);
 
-	  return '{"user":'.json_encode($userResponse).' }';
+		// $user = $this->prepareUser($user);
+		// $user->rank_by_won_challenges = $user->rankByWonChallenges();
+
+	  return '{"user":'.$user.' }';
 	}
 
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-	private function prepareUser($user)
-	{
+	private function prepareUser($user) {
 		if($user) {
 			$user->rank = $user->rank();
-			// $user->rank_by_won_challenges = $user->rankByWonChallenges();
 
-			if($user->lab) {
-					$user->lab_id = $user->lab->id;
-			}
-
-			if($user->rocket) {
-					$user->rocket_id = $user->rocket->id;
-			}
-
-			if($user->challenges) {
-					$user->rocket_id = $user->rocket->id;
-			}
-
-			$challenges = Challenge::ofUser($user)->get();
-
-			$challengesIds = [];
-			foreach($challenges as $challenge) {
-				array_push($challengesIds, $challenge->id);
-			}
-			$user["challenges"] = $challengesIds;
+			// $challenges = Challenge::ofUser($user)->get();
+			//
+			// $challengesIds = [];
+			// foreach($challenges as $challenge) {
+			// 	array_push($challengesIds, $challenge->id);
+			// }
+			// $user["challenges"] = $challengesIds;
 		}
 
 		return $user;
+	}
+
+	private function updateRanks() {
+		DB::statement(DB::raw('set @row:=0'));
+
+		DB::statement(DB::raw('update users users_a
+		inner join (select id, @row:=@row+1 as rank, updated_at from users order by score desc, stars desc) users_b
+			on users_a.id = users_b.id
+	 	set users_a.rank = users_b.rank, users_a.updated_at = users_b.updated_at;'));
 	}
 
 }
