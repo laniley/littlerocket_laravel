@@ -29,18 +29,6 @@ class RocketComponentModelMmController extends \BaseController {
     return '{ "rocketComponentModelMms": '.$rocketComponentModelMms.'}';
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -57,7 +45,6 @@ class RocketComponentModelMmController extends \BaseController {
 	  return '{"rocketComponentModelMm":'.$rocketComponentModelMm.' }';
 	}
 
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -67,21 +54,10 @@ class RocketComponentModelMmController extends \BaseController {
 	public function show($id)
 	{
 		$rocketComponentModelMm = RocketComponentModelMm::findOrFail($id);
-		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.'}';
+		$rocketComponentModel_id = $rocketComponentModelMm->rocketComponentModel_id;
+		$rocketComponentModel = RocketComponentModel::findOrFail($rocketComponentModel_id);
+		return '{"rocketComponentModelMm":'.$rocketComponentModelMm.', "rocketComponentModels": ['.$rocketComponentModel.']}';
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Update the specified resource in storage.

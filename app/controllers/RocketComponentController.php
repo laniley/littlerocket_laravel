@@ -29,23 +29,11 @@ class RocketComponentController extends \BaseController {
 
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store() {
 		$rocketComponent = RocketComponent::firstOrCreate(array(
 			 'rocket_id' => Input::get('rocketComponent.rocket_id'),
        'type' => Input::get('rocketComponent.type')
@@ -83,22 +71,8 @@ class RocketComponentController extends \BaseController {
 	{
 		$rocketComponent = RocketComponent::findOrFail($id);
     $rocketComponent = $this->prepareRocketComponent($rocketComponent);
-
 		$rocketComponentModelMms = $rocketComponent->myRocketComponentModelMms;
-
 		return '{"rocketComponent":'.$rocketComponent.', "rocketComponentModelMms": '.$rocketComponentModelMms.'}';
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
 	}
 
 
