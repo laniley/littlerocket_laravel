@@ -88,6 +88,8 @@ class UserController extends \BaseController {
 		$user->gender = Input::get('user.gender');
 		$user->score = Input::get('user.score');
 		$user->stars = Input::get('user.stars');
+		$user->stars_all_time = Input::get('user.stars_all_time');
+		$user->flights = Input::get('user.flights');
 		$user->reached_level = Input::get('user.reached_level');
 		$user->experience = Input::get('user.experience');
 		$user->first_login = false;
@@ -96,7 +98,12 @@ class UserController extends \BaseController {
 
 		$this->updateRanks();
 
-		$user = User::findOrFail($id);
+		$user = new User();
+		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'score', 'stars', 'rank', 'reached_level', 'experience');
+		$user = $user->where('id', $id);
+		$user = $user->first();
+
+
 
 		// $user = $this->prepareUser($user);
 		// $user->rank_by_won_challenges = $user->rankByWonChallenges();
