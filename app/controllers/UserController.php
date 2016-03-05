@@ -99,7 +99,7 @@ class UserController extends \BaseController {
 		$this->updateRanks();
 
 		$user = new User();
-		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'score', 'stars', 'rank', 'reached_level', 'experience');
+		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'rank', 'reached_level', 'experience');
 		$user = $user->where('id', $id);
 		$user = $user->first();
 
