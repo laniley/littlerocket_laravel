@@ -32,10 +32,10 @@ class UserController extends \BaseController {
 		$users = $users->get();
 
 		// if get player -> get also achievements
-		if(isset($fb_id)) {
+		if(isset($fb_id) && count($users) > 0) {
+			$achievements = Achievement::all();
 			foreach ($users as $user) {
 				$achievement_ids = [];
-				$achievements = Achievement::all();
 				foreach ($achievements as $achievement) {
 					$achievements_mm = UserAchievementMm::firstOrCreate(array(
 					 'user_id' => $user['id'],
@@ -45,7 +45,6 @@ class UserController extends \BaseController {
 					$achievement['user_id'] = $user['id'];
 					array_push($achievement_ids, $achievements_mm['id']);
 				}
-
 				$user->achievements = $achievement_ids;
 			}
 
@@ -87,15 +86,21 @@ class UserController extends \BaseController {
 
 		$user->save();
 
-		// $id = $user->id;
-		//
-		// $this->updateRanks();
-		//
-		// $user = User::findOrFail($id);
+		$achievements = Achievement::all();
+		$achievement_ids = [];
+		foreach ($achievements as $achievement) {
+			$achievements_mm = UserAchievementMm::firstOrCreate(array(
+			 'user_id' => $user->id,
+			 'achievement_id' => $achievement['id']
+			));
+			$achievement['id'] = $achievements_mm['id'];
+			$achievement['user_id'] = $user->id;
+			array_push($achievement_ids, $achievements_mm['id']);
+		}
 
-		// $user->rank_by_won_challenges = $user->rankByWonChallenges();
+		$user->achievements = $achievement_ids;
 
-	  return '{"user":'.$user.' }';
+	  return '{"user":'.$user.', "achievements": '.$achievements.'}';
 	}
 
 	/**
