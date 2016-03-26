@@ -27,8 +27,7 @@ class CreateRocketComponentModelMmTable extends Migration {
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 		});
 
-		Schema::table('rocket_components', function($table)
-		{
+		Schema::table('rocket_components', function($table) {
 			$table->foreign('selectedRocketComponentModelMm_id', 'comp_comp_model_mm_foreign')->references('id')->on('rocket_component_model_mm');
 		});
 	}

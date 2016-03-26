@@ -31,6 +31,29 @@ class UserController extends \BaseController {
 
 		$users = $users->get();
 
+		// if get player -> get also achievements
+		if(isset($fb_id)) {
+			foreach ($users as $user) {
+				$achievement_ids = [];
+				$achievements = Achievement::all();
+				foreach ($achievements as $achievement) {
+					$achievements_mm = UserAchievementMm::firstOrCreate(array(
+					 'user_id' => $user['id'],
+					 'achievement_id' => $achievement['id']
+					));
+					$achievement['id'] = $achievements_mm['id'];
+					$achievement['user_id'] = $user['id'];
+					array_push($achievement_ids, $achievements_mm['id']);
+				}
+
+				$user->achievements = $achievement_ids;
+			}
+
+			return '{ "users": '.$users.', "achievements": '.$achievements.' }';
+		}
+		else {
+			return '{ "users": '.$users.'}';
+		}
 		// foreach ($users as $user) {
 		// 	$user = $this->prepareUser($user);
 		// 	// if(isset($fb_id)) {
@@ -38,7 +61,7 @@ class UserController extends \BaseController {
 		// 	// }
 		// }
 
-		return '{ "users": '.$users.' }';
+
 	}
 
 	/**
@@ -122,6 +145,14 @@ class UserController extends \BaseController {
 			// 	array_push($challengesIds, $challenge->id);
 			// }
 			// $user["challenges"] = $challengesIds;
+		}
+
+		return $user;
+	}
+
+	private function getAchievements($user) {
+		if($user) {
+			$user->achievements = $user->achievements();
 		}
 
 		return $user;
