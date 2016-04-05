@@ -15,6 +15,16 @@ class UserController extends \BaseController {
 
 		$users = new User();
 
+		$users = $users -> leftJoin('users_achievements_mm', function($join) {
+											$join -> on('users_achievements_mm.user_id', '=', 'users.id');
+											$join -> on('users_achievements_mm.unlocked', '=', DB::raw(1));
+										})
+										->leftJoin('achievements', function($join) {
+											$join -> on('users_achievements_mm.achievement_id', '=', 'achievements.id');
+										})
+										-> select(DB::raw('users.*, SUM(achievement_points) AS achievement_points'))
+										-> groupBy('users.id');
+
 		if(isset($fb_id)) {
 			$users = $users->where('fb_id', $fb_id);
 		}
@@ -22,6 +32,11 @@ class UserController extends \BaseController {
 			if(isset($type) && $type == "score") {
 				$users = $users -> orderByRankDesc()
 									      -> take(50);
+			}
+			else if(isset($type) && $type == "achievements") {
+				$users = $users -> orderByAchievementsDesc()
+												-> where('unlocked', true)
+												-> take(50);
 			}
 			else if(isset($type) && $type == "challenges") {
 				$users = $users -> orderByChallengesRankDesc()
@@ -82,7 +97,7 @@ class UserController extends \BaseController {
 		$user->stars = Input::get('user.stars');
 		$user->reached_level = Input::get('user.reached_level');
 
-		$user->rank = DB::table('users')->count() + 1;
+		$user->rank_by_score = DB::table('users')->count() + 1;
 
 		$user->save();
 
@@ -127,7 +142,7 @@ class UserController extends \BaseController {
 		$this->updateRanks();
 
 		$user = new User();
-		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'rank', 'reached_level', 'experience');
+		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'rank_by_score', 'reached_level', 'experience');
 		$user = $user->where('id', $id);
 		$user = $user->first();
 
@@ -167,9 +182,9 @@ class UserController extends \BaseController {
 		DB::statement(DB::raw('set @row:=0'));
 
 		DB::statement(DB::raw('update users users_a
-		inner join (select id, @row:=@row+1 as rank, updated_at from users order by score desc, stars desc) users_b
+		inner join (select id, @row:=@row+1 as rank_by_score, updated_at from users order by score desc, stars desc) users_b
 			on users_a.id = users_b.id
-	 	set users_a.rank = users_b.rank, users_a.updated_at = users_b.updated_at;'));
+	 	set users_a.rank_by_score = users_b.rank_by_score, users_a.updated_at = users_b.updated_at;'));
 	}
 
 }

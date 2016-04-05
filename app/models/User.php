@@ -85,6 +85,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $query;
 	}
 
+	public function scopeOrderByAchievementsDesc($query) {
+		$query = $query -> orderBy(DB::raw('SUM(achievement_points)'), 'desc');
+	}
+
 	public function scopeOrderByChallengesRankDesc($query) {
 	  $query = $query	->leftJoin('challenges', function ($join) {
 					            $join->on('challenges.from_player_id', '=', 'users.id')
