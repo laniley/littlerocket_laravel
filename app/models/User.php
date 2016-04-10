@@ -81,12 +81,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function scopeOrderByRankDesc($query) {
 	  $query = $query->orderBy('score','DESC');
 		$query = $query->orderBy('stars','DESC');
-		$query = $query->orderBy('created_at','ASC');
+		$query = $query->orderBy('created_at','DESC');
 		return $query;
 	}
 
 	public function scopeOrderByAchievementsDesc($query) {
 		$query = $query -> orderBy(DB::raw('SUM(achievement_points)'), 'desc');
+		$query = $query -> orderBy('created_at','DESC');
+		return $query;
 	}
 
 	public function scopeOrderByChallengesRankDesc($query) {
