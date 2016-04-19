@@ -78,6 +78,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $results[0]->rankByWonChallenges;
 	}
 
+	public function rankByAchievementPoints() {
+
+		DB::statement(DB::raw('set @row:=0'));
+
+		$results = DB::select('select * from (
+														select id, @row:=@row+1 as rankByAchievementPoints from (
+															select users.id, SUM(achievement_points) AS achievement_points
+															from users
+																left join users_achievements_mm
+																	on users.id = users_achievements_mm.user_id
+																left join achievements
+																	on users_achievements_mm.achievement_id = achievements.id
+															where unlocked=1
+															group by users.id
+															order by achievement_points desc, users_achievements_mm.created_at desc
+														) as ranks
+													) as sorted_ranks	where id='.$this->attributes['id'].';');
+
+		return $results[0]->rankByAchievementPoints;
+	}
+
 	public function scopeOrderByRankDesc($query) {
 	  $query = $query->orderBy('score','DESC');
 		$query = $query->orderBy('stars','DESC');

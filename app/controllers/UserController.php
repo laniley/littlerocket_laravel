@@ -50,6 +50,9 @@ class UserController extends \BaseController {
 		if(isset($fb_id) && count($users) > 0) {
 			$achievements = Achievement::all();
 			foreach ($users as $user) {
+
+				$user->rank_by_achievement_points = $user->rankByAchievementPoints();
+				
 				$achievement_ids = [];
 				foreach ($achievements as $achievement) {
 					$achievements_mm = UserAchievementMm::firstOrCreate(array(
