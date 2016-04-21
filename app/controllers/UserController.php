@@ -22,7 +22,7 @@ class UserController extends \BaseController {
 										->leftJoin('achievements', function($join) {
 											$join -> on('users_achievements_mm.achievement_id', '=', 'achievements.id');
 										})
-										-> select(DB::raw('users.*, SUM(achievement_points) AS achievement_points'))
+										-> select(DB::raw('users.*, SUM(achievement_points) AS achievement_points, SUM(users_achievements_mm.updated_at) AS max_updated'))
 										-> groupBy('users.id');
 
 		if(isset($fb_id)) {
@@ -52,7 +52,7 @@ class UserController extends \BaseController {
 			foreach ($users as $user) {
 
 				$user->rank_by_achievement_points = $user->rankByAchievementPoints();
-				
+
 				$achievement_ids = [];
 				foreach ($achievements as $achievement) {
 					$achievements_mm = UserAchievementMm::firstOrCreate(array(

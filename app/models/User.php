@@ -84,7 +84,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		$results = DB::select('select * from (
 														select id, @row:=@row+1 as rankByAchievementPoints from (
-															select users.id, SUM(achievement_points) AS achievement_points
+															select users.id, SUM(achievement_points) AS achievement_points, SUM(users_achievements_mm.updated_at) AS max_updated
 															from users
 																left join users_achievements_mm
 																	on users.id = users_achievements_mm.user_id
@@ -92,7 +92,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 																	on users_achievements_mm.achievement_id = achievements.id
 															where unlocked=1
 															group by users.id
-															order by achievement_points desc, users_achievements_mm.created_at desc
+															order by achievement_points desc, max_updated asc
 														) as ranks
 													) as sorted_ranks	where id='.$this->attributes['id'].';');
 
@@ -107,8 +107,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function scopeOrderByAchievementsDesc($query) {
-		$query = $query -> orderBy(DB::raw('SUM(achievement_points)'), 'desc');
-		$query = $query -> orderBy('created_at','DESC');
+		$query = $query -> orderBy('achievement_points', 'desc');
+		$query = $query -> orderBy('max_updated','asc');
 		return $query;
 	}
 
