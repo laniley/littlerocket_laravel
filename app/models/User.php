@@ -96,7 +96,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 														) as ranks
 													) as sorted_ranks	where id='.$this->attributes['id'].';');
 
-		return $results[0]->rankByAchievementPoints;
+		if(isset($results[0])) {
+			return $results[0]->rankByAchievementPoints;
+		}
+		else {
+			return DB::table('users')->count() + 1;
+		}
 	}
 
 	public function scopeOrderByRankDesc($query) {

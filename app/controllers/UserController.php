@@ -100,9 +100,13 @@ class UserController extends \BaseController {
 		$user->stars = Input::get('user.stars');
 		$user->reached_level = Input::get('user.reached_level');
 
-		$user->rank_by_score = DB::table('users')->count() + 1;
+		$count = DB::table('users')->count() + 1;
+
+		$user->rank_by_score = $count;
 
 		$user->save();
+
+		$user->rank_by_achievement_points = $count;
 
 		$achievements = Achievement::all();
 		$achievement_ids = [];
@@ -149,7 +153,7 @@ class UserController extends \BaseController {
 		$user = $user->where('id', $id);
 		$user = $user->first();
 
-
+		$user->rank_by_achievement_points = $user->rankByAchievementPoints();
 
 		// $user = $this->prepareUser($user);
 		// $user->rank_by_won_challenges = $user->rankByWonChallenges();
