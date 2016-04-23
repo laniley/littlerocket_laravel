@@ -39,18 +39,13 @@ class CreateRocketComponentModelMmTable extends Migration {
 	 */
 	public function down()
 	{
-		if (Schema::hasColumn('rocket_components', 'selectedRocketComponentModelMm_id'))
-		{
-			Schema::table('rocket_components', function($table)
-			{
-				$table->dropForeign('comp_comp_model_mm_foreign');
-			});
-		}
+		\DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-		if (Schema::hasTable('rocket_component_model_mm'))
-		{
+		if (Schema::hasTable('rocket_component_model_mm')) {
 			Schema::drop('rocket_component_model_mm');
 		}
+
+		\DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }

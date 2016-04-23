@@ -26,11 +26,11 @@ class AddForeignKeysToRocketComponentModelMmTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('rocket_component_model_mm', function($table)
-		{
-			$table->dropForeign('comp_model_mm_comp_foreign');
-			$table->dropForeign('comp_model_mm_comp_model_foreign');
-		});
+		// Schema::table('rocket_component_model_mm', function($table)
+		// {
+		// 	$table->dropForeign('comp_model_mm_comp_foreign');
+		// 	$table->dropForeign('comp_model_mm_comp_model_foreign');
+		// });
 	}
 
 }

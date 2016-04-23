@@ -33,7 +33,9 @@ class CreateAchievementsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('achievements');
+		if (Schema::hasTable('achievements')) {
+			Schema::drop('achievements');
+		}
 	}
 
 }

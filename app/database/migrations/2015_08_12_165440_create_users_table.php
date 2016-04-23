@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->string('gender')->nullable();
 			$table->integer('score')->default(0);
 			$table->integer('stars')->default(0);
-			$table->integer('rank')->default(0);
+			$table->integer('rank_by_score')->default(0);
 			$table->integer('reached_level')->default(1);
 			$table->boolean('first_login')->default(true);
 
@@ -40,8 +40,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		if (Schema::hasTable('users'))
-		{
+		if (Schema::hasTable('users')) {
 			Schema::drop('users');
 		}
 	}

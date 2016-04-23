@@ -35,7 +35,9 @@ class CreateUserAchievementsMmTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users_achievements_mm');
+		if (Schema::hasTable('users_achievements_mm')) {
+			Schema::drop('users_achievements_mm');
+		}
 	}
 
 }

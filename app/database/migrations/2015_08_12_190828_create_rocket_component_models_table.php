@@ -34,10 +34,14 @@ class CreateRocketComponentModelsTable extends Migration {
 	 */
 	public function down()
 	{
+		\DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
 		if (Schema::hasTable('rocket_component_models'))
 		{
 			Schema::drop('rocket_component_models');
 		}
+
+		\DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
 
 }

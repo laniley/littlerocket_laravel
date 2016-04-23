@@ -36,7 +36,9 @@ class CreateChallengesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('challenges');
+		if (Schema::hasTable('challenges')) {
+			Schema::drop('challenges');
+		}
 	}
 
 }
