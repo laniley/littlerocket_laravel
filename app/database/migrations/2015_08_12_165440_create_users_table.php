@@ -23,8 +23,10 @@ class CreateUsersTable extends Migration {
 			$table->string('gender')->nullable();
 			$table->integer('score')->default(0);
 			$table->integer('stars')->default(0);
+			$table->integer('stars_all_time')->default(0);
 			$table->integer('rank_by_score')->default(0);
 			$table->integer('reached_level')->default(1);
+			$table->integer('flights')->default(0);
 			$table->boolean('first_login')->default(true);
 
 			$table->dateTime('last_login')->default('0000-00-00 00:00:00');
