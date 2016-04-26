@@ -15,7 +15,11 @@ class CreateAchievementsTable extends Migration {
 		Schema::create('achievements', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('type');
+			$table->enum('type', array(
+				'flight-achievement',
+				'stars-all-time-achievement',
+				'friends-achievement'
+			));
 			/* how many points are needed, to get that achievement? E.g. how often must the player fly? How many stars must he collect? */
 			$table->integer('needed_progress_points')->unsigned();
 			/* the points the player get as a reward */
