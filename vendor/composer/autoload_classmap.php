@@ -16,6 +16,7 @@ return array(
     'Challenge' => $baseDir . '/app/models/Challenge.php',
     'ChallengeController' => $baseDir . '/app/controllers/ChallengeController.php',
     'CreateAchievementsTable' => $baseDir . '/app/database/migrations/2016_03_26_071707_create_achievements_table.php',
+    'CreateArmadasTable' => $baseDir . '/app/database/migrations/2015_08_11_150407_create_armadas_table.php',
     'CreateChallengesTable' => $baseDir . '/app/database/migrations/2015_09_22_185335_create_challenges_table.php',
     'CreateLabsTable' => $baseDir . '/app/database/migrations/2015_08_12_175414_create_labs_table.php',
     'CreateRocketComponentModelLevelMmTable' => $baseDir . '/app/database/migrations/2015_08_12_190830_create_rocket_component_model_level_mm_table.php',

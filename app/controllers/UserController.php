@@ -133,6 +133,9 @@ class UserController extends \BaseController {
 	 */
 	public function update($id) {
 		$user = User::findOrFail($id);
+
+		$old_armada_id = $user->armada_id;
+
 		$user->email = Input::get('user.email');
 		$user->img_url = Input::get('user.img_url');
 		$user->gender = Input::get('user.gender');
@@ -142,6 +145,8 @@ class UserController extends \BaseController {
 		$user->flights = Input::get('user.flights');
 		$user->reached_level = Input::get('user.reached_level');
 		$user->experience = Input::get('user.experience');
+		$user->armada_id = Input::get('user.armada_id');
+		$user->armada_rank = Input::get('user.armada_rank');
 		$user->first_login = false;
 
 		$user->save();
@@ -149,11 +154,32 @@ class UserController extends \BaseController {
 		$this->updateRanks();
 
 		$user = new User();
-		$user = $user->select('id', 'fb_id', 'email', 'img_url', 'gender', 'first_name', 'last_name', 'rank_by_score', 'reached_level', 'experience');
+		$user = $user->select(
+			'id',
+			'fb_id',
+			'email',
+			'img_url',
+			'gender',
+			'first_name',
+			'last_name',
+			'rank_by_score',
+			'reached_level',
+			'experience',
+			'armada_id',
+			'armada_rank'
+		);
 		$user = $user->where('id', $id);
 		$user = $user->first();
 
 		$user->rank_by_achievement_points = $user->rankByAchievementPoints();
+
+		if($old_armada_id) {
+			$armada = Armada::findOrFail($old_armada_id);
+			$count = $armada->numberOfMembers();
+			if($count == 0) {
+				$armada->delete();
+			}
+		}
 
 		// $user = $this->prepareUser($user);
 		// $user->rank_by_won_challenges = $user->rankByWonChallenges();

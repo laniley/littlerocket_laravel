@@ -200,6 +200,7 @@ class ComposerStaticInitdb22792190eeef2369e5980ffb8b1512
         'Challenge' => __DIR__ . '/../..' . '/app/models/Challenge.php',
         'ChallengeController' => __DIR__ . '/../..' . '/app/controllers/ChallengeController.php',
         'CreateAchievementsTable' => __DIR__ . '/../..' . '/app/database/migrations/2016_03_26_071707_create_achievements_table.php',
+        'CreateArmadasTable' => __DIR__ . '/../..' . '/app/database/migrations/2015_08_11_150407_create_armadas_table.php',
         'CreateChallengesTable' => __DIR__ . '/../..' . '/app/database/migrations/2015_09_22_185335_create_challenges_table.php',
         'CreateLabsTable' => __DIR__ . '/../..' . '/app/database/migrations/2015_08_12_175414_create_labs_table.php',
         'CreateRocketComponentModelLevelMmTable' => __DIR__ . '/../..' . '/app/database/migrations/2015_08_12_190830_create_rocket_component_model_level_mm_table.php',

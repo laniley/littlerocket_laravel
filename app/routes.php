@@ -14,6 +14,7 @@
 Route::group(array('prefix' => '/api/v1/'), function()
 {
     Route::resource('achievements', 'AchievementController');
+    Route::resource('armadas', 'ArmadaController');
     Route::resource('challenges', 'ChallengeController');
     Route::resource('users', 'UserController');
     Route::resource('labs', 'LabController');
