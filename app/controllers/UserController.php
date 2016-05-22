@@ -125,12 +125,11 @@ class UserController extends \BaseController {
 	  return '{"user":'.$user.', "achievements": '.$achievements.'}';
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	public function show($id) {
+		$user = User::findOrFail($id);
+		return '{"user":'.$user.' }';
+	}
+
 	public function update($id) {
 		$user = User::findOrFail($id);
 

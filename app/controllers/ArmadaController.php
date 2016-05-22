@@ -25,7 +25,7 @@ class ArmadaController extends \BaseController {
 					array_push($allUsers, $user);
 				}
 			}
-			$armada["users"] = $userIds;
+
 			return '{ "armadas": '.$armadas.', "users": ['.implode($allUsers, ',').'] }';
 		}
 
@@ -52,13 +52,22 @@ class ArmadaController extends \BaseController {
 	 */
 	public function show($id) {
 		$armada = Armada::findOrFail($id);
+
 		$users = User::ofArmada($armada)->get();
 		$userIds = [];
 		foreach($users as $user) {
 			array_push($userIds, $user->id);
 		}
 		$armada["users"] = $userIds;
-    return '{ "armada": '.$armada.', "users": '.$users.' }';
+
+		$requests = ArmadaMembershipRequest::where('armada_id', $id)->get();
+		$requestIds = [];
+		foreach($requests as $request) {
+			array_push($requestIds, $request->id);
+		}
+		$armada['armadaMembershipRequests'] = $requestIds;
+
+    return '{ "armada": '.$armada.', "users": '.$users.', "armadaMembershipRequests": '.$requests.' }';
 	}
 
 	/**
