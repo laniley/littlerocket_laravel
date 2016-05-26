@@ -144,9 +144,15 @@ class UserController extends \BaseController {
 		$user->flights = Input::get('user.flights');
 		$user->reached_level = Input::get('user.reached_level');
 		$user->experience = Input::get('user.experience');
-		$user->armada_id = Input::get('user.armada_id');
-		$user->armada_rank = Input::get('user.armada_rank');
 		$user->first_login = false;
+
+		/* user not yet in an armada OR user is leaving an armada */
+		/* changing an armada is not allowed */
+		if($user->armada_id == null || Input::get('user.armada_id') == null) {
+			$user->armada_id = Input::get('user.armada_id');
+		}
+
+		$user->armada_rank = Input::get('user.armada_rank');
 
 		$user->save();
 

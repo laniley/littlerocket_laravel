@@ -1,6 +1,6 @@
 <?php
 
-class ArmadaMembershipRequestController extends \BaseController {
+class FBAppRequestController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,19 +9,23 @@ class ArmadaMembershipRequestController extends \BaseController {
 	 */
 	public function index() {
 
-		$requests = new ArmadaMembershipRequest();
+		$requests = new FBAppRequest();
 
 		if(Input::has('armada_id')) {
 			$requests = $requests->where('armada_id', Input::get('armada_id'));
 		}
 
-		if(Input::has('user_id')) {
-			$requests = $requests->where('user_id', Input::get('user_id'));
+		if(Input::has('type')) {
+			$requests = $requests->where('type', Input::get('type'));
+		}
+
+		if(Input::has('fb_id')) {
+			$requests = $requests->where('fb_id', Input::get('fb_id'));
 		}
 
 		$requests = $requests->get();
 
-		return '{ "armadaMembershipRequests": '.$requests.' }';
+		return '{ "fbAppRequests": '.$requests.' }';
 	}
 
 	/**
@@ -30,11 +34,14 @@ class ArmadaMembershipRequestController extends \BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		$request = ArmadaMembershipRequest::firstOrCreate(array(
-			 'user_id' => Input::get('armadaMembershipRequest.user_id'),
-       'armada_id' => Input::get('armadaMembershipRequest.armada_id')
+		$request = FBAppRequest::firstOrCreate(array(
+			 'fb_request_id' => Input::get('fbAppRequest.fb_request_id')
 		));
-	  return '{"armadaMembershipRequest":'.$request.' }';
+		$request->type = Input::get('fbAppRequest.type');
+		$request->fb_id = Input::get('fbAppRequest.fb_id');
+		$request->armada_id = Input::get('fbAppRequest.armada_id');
+		$request->save();
+	  return '{"fbAppRequest":'.$request.' }';
 	}
 
 
@@ -67,10 +74,5 @@ class ArmadaMembershipRequestController extends \BaseController {
 		// $achievement_mm->save();
 		// // $achievement = $this->prepare($achievement_mm);
 		// return '{"achievement":'.$achievement_mm.' }';
-	}
-
-	public function destroy($id) {
-		ArmadaMembershipRequest::destroy($id);
-		return '{}';
 	}
 }
