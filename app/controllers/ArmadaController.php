@@ -15,7 +15,7 @@ class ArmadaController extends \BaseController {
 			return '{ "armadas": '.$armadas.' }';
 		}
 		else if(isset($mode) && $mode == "suggestions") {
-			$armadas = Armada::orderByMembersCountDesc()->get();
+			$armadas = Armada::orderByMembersCountDesc()-> take(50)->get();
 			$userIds = [];
 			$allUsers = [];
 			foreach($armadas as $armada) {
@@ -28,7 +28,19 @@ class ArmadaController extends \BaseController {
 
 			return '{ "armadas": '.$armadas.', "users": ['.implode($allUsers, ',').'] }';
 		}
-
+		else if(isset($mode) && $mode == "leaderboard") {
+			$armadas = Armada::orderByScoreDesc()-> take(50)->get();
+			$userIds = [];
+			$allUsers = [];
+			foreach($armadas as $armada) {
+				$users = User::ofArmada($armada)->get();
+				foreach($users as $user) {
+					array_push($userIds, $user->id);
+					array_push($allUsers, $user);
+				}
+			}
+			return '{ "armadas": '.$armadas.', "users": ['.implode($allUsers, ',').'] }';
+		}
 	}
 
 	/**

@@ -2,11 +2,6 @@
 
 class UserController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index() {
 
 		$fb_id = Input::get('fb_id');
@@ -48,11 +43,12 @@ class UserController extends \BaseController {
 
 		// if get player -> get also achievements
 		if(isset($fb_id) && count($users) > 0) {
+
 			$achievements = Achievement::all();
+
 			foreach ($users as $user) {
-
+				// Achievements
 				$user->rank_by_achievement_points = $user->rankByAchievementPoints();
-
 				$achievement_ids = [];
 				foreach ($achievements as $achievement) {
 					$achievements_mm = UserAchievementMm::firstOrCreate(array(
@@ -64,9 +60,16 @@ class UserController extends \BaseController {
 					array_push($achievement_ids, $achievements_mm['id']);
 				}
 				$user->achievements = $achievement_ids;
+				// fb-app-requests
+				$fb_app_requests = FBAppRequest::where('fb_id', $user->fb_id)->get();
+				$request_ids = [];
+				foreach($fb_app_requests as $request) {
+					array_push($request_ids, $request['id']);
+				}
+				$user->fb_app_requests = $request_ids;
 			}
 
-			return '{ "users": '.$users.', "achievements": '.$achievements.' }';
+			return '{ "users": '.$users.', "achievements": '.$achievements.', "fbAppRequests": '.$fb_app_requests.' }';
 		}
 		else {
 			return '{ "users": '.$users.'}';
@@ -81,11 +84,6 @@ class UserController extends \BaseController {
 
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store() {
 		$user = User::firstOrCreate(array(
 		 'fb_id' => Input::get('user.fb_id')
@@ -149,7 +147,18 @@ class UserController extends \BaseController {
 		/* user not yet in an armada OR user is leaving an armada */
 		/* changing an armada is not allowed */
 		if($user->armada_id == null || Input::get('user.armada_id') == null) {
-			$user->armada_id = Input::get('user.armada_id');
+			/* if user wants to join an armada */
+			/* check, if there is an empty place in the armada. Not more than 20 members are allowed. */
+			if(Input::get('user.armada_id') != null) {
+				$armada = Armada::findOrFail(Input::get('user.armada_id'));
+				if($armada->numberOfMembers() < 20) {
+					$user->armada_id = Input::get('user.armada_id');
+				}
+			}
+			/* if user is leaving an armada */
+			else {
+				$user->armada_id = Input::get('user.armada_id');
+			}
 		}
 
 		$user->armada_rank = Input::get('user.armada_rank');

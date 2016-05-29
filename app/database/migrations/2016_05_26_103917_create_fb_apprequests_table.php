@@ -16,7 +16,7 @@ class CreateFbApprequestsTable extends Migration {
 		{
 			$table->increments('id');
 
-			$table->string('fb_request_id')->unique();
+			$table->string('fb_request_id');
 			$table->string('type')->nullable();
 			$table->string('fb_id')->unique()->nullable();
 			$table->integer('armada_id')->unsigned()->nullable();
@@ -27,6 +27,7 @@ class CreateFbApprequestsTable extends Migration {
 			$table->foreign('armada_id')->references('id')->on('armadas');
 
 			$table->unique(['fb_id', 'armada_id']);
+			$table->unique(['fb_id', 'fb_request_id']);
 		});
 	}
 

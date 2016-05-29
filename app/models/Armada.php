@@ -42,4 +42,16 @@ class Armada extends Eloquent{
 									->having('members_count', ' < ', '20')
 									->orderBy('members_count', 'DESC');
 	}
+
+	public function scopeOrderByScoreDesc($query) {
+		$query = $query	->leftJoin('users', function ($join) {
+					            $join->on('armadas.id', '=', 'users.armada_id');
+					         })
+									 ->select(DB::raw(
+												 'armadas.id, armadas.name,
+												 	sum(score) + sum(experience) as score'
+									))
+									->groupBy('armadas.id', 'armadas.name')
+									->orderBy(DB::raw('sum(score) + sum(experience)'), 'DESC');
+	}
 }

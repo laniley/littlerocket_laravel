@@ -25,6 +25,13 @@ class FBAppRequestController extends \BaseController {
 
 		$requests = $requests->get();
 
+		if(Input::has('fb_id')) {
+			$users = User::where('fb_id', Input::get('fb_id'))->first();
+			foreach($requests as $request) {
+				$request['user_id'] = $users['id'];
+			}
+		}
+
 		return '{ "fbAppRequests": '.$requests.' }';
 	}
 
@@ -35,7 +42,8 @@ class FBAppRequestController extends \BaseController {
 	 */
 	public function store() {
 		$request = FBAppRequest::firstOrCreate(array(
-			 'fb_request_id' => Input::get('fbAppRequest.fb_request_id')
+			 'fb_request_id' => Input::get('fbAppRequest.fb_request_id'),
+			 'fb_id' => Input::get('fbAppRequest.fb_id'),
 		));
 		$request->type = Input::get('fbAppRequest.type');
 		$request->fb_id = Input::get('fbAppRequest.fb_id');
@@ -74,5 +82,10 @@ class FBAppRequestController extends \BaseController {
 		// $achievement_mm->save();
 		// // $achievement = $this->prepare($achievement_mm);
 		// return '{"achievement":'.$achievement_mm.' }';
+	}
+
+	public function destroy($id) {
+		FBAppRequest::destroy($id);
+		return '{}';
 	}
 }
