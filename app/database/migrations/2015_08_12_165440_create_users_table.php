@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration {
 			$table->string('img_url')->nullable();
 			$table->string('gender')->nullable();
 			$table->integer('energy')->default(10);
+			$table->integer('max_energy')->default(10);
 			$table->integer('score')->default(0);
 			$table->integer('stars')->default(0);
 			$table->integer('stars_all_time')->default(0);

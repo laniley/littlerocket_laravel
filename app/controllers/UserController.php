@@ -137,6 +137,7 @@ class UserController extends \BaseController {
 		$user->img_url = Input::get('user.img_url');
 		$user->gender = Input::get('user.gender');
 		$user->energy = Input::get('user.energy');
+		$user->energy = Input::get('user.max_energy');
 		$user->score = Input::get('user.score');
 		$user->stars = Input::get('user.stars');
 		$user->stars_all_time = Input::get('user.stars_all_time');
