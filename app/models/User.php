@@ -37,7 +37,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'gender',
 		'rank',
 		'armada_id',
-		'armada_rank'
+		'armada_rank',
+		'energy',
+		'energy_recharge_start'
 	);
 
 	public function lab() {
@@ -48,8 +50,37 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       return $this->hasOne('Rocket');
   }
 
-	public function scopeOfArmada($query, $armada)
-	{
+	public function updateEnergy() {
+
+			$results = DB::select('select
+																	case when energy + new_energy < max_energy then energy + new_energy else max_energy end as new_energy,
+																	energy as old_energy,
+																	max_energy,
+																	seconds_left
+														 from users
+														 inner join (
+		 											 			select
+																		id,
+																		floor(time_to_sec(timediff(NOW(), energy_recharge_start)) / 300) as new_energy,
+																		time_to_sec(timediff(NOW(), energy_recharge_start)) - (floor(time_to_sec(timediff(NOW(), energy_recharge_start)) / 300) * 300) seconds_left
+																from users
+		 											 	 ) as temp
+		 											 				on users.id = temp.id
+		 											 	 where users.id='.$this->attributes['id'].';');
+
+			$new_energy_recharge_start = time() - $results[0]->seconds_left;
+
+			DB::table('users')
+				->where('id', $this->attributes['id'])
+				->update([
+					'energy' => $results[0]->new_energy,
+					'energy_recharge_start' => date('Y-m-d H:i:s', $new_energy_recharge_start + 7200 /* two hours */)
+				]);
+
+			return $results[0]->new_energy;
+	}
+
+	public function scopeOfArmada($query, $armada) {
 	  $query = $query->where('armada_id', $armada->id);
 		return $query;
 	}
