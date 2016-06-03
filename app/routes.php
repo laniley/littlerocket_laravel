@@ -18,13 +18,13 @@ Route::group(array('prefix' => '/api/v1/'), function()
     Route::resource('armadaMembershipRequests', 'ArmadaMembershipRequestController');
     Route::resource('challenges', 'ChallengeController');
     Route::resource('fbAppRequests', 'FBAppRequestController');
-    Route::resource('users', 'UserController');
     Route::resource('labs', 'LabController');
     Route::resource('rockets', 'RocketController');
     Route::resource('rocketComponents', 'RocketComponentController');
     Route::resource('rocketComponentModels', 'RocketComponentModelController');
     Route::resource('rocketComponentModelMms', 'RocketComponentModelMmController');
-    Route::resource('rocketComponentModelLevels', 'RocketComponentModelLevelController');
-    Route::resource('rocketComponentModelLevelMms', 'RocketComponentModelLevelMmController');
-
+    // Route::resource('rocketComponentModelLevels', 'RocketComponentModelLevelController');
+    // Route::resource('rocketComponentModelLevelMms', 'RocketComponentModelLevelMmController');
+    Route::resource('users', 'UserController');
+    Route::resource('userEnergies', 'EnergyController');
 });

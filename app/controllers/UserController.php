@@ -41,7 +41,7 @@ class UserController extends \BaseController {
 
 		$users = $users->get();
 
-		// if get player -> get also achievements
+		// if get player -> get also achievements, fb-app-requests and energy
 		if(isset($fb_id) && count($users) > 0) {
 
 			$achievements = Achievement::all();
@@ -67,8 +67,11 @@ class UserController extends \BaseController {
 					array_push($request_ids, $request['id']);
 				}
 				$user->fb_app_requests = $request_ids;
-
-				$user->energy = $user->updateEnergy();
+				// Energy
+				$energy = Energy::firstOrCreate(array(
+					 'user_id' => $user->id
+				));
+				$user['energy_id'] = $energy->id;
 			}
 
 			return '{ "users": '.$users.', "achievements": '.$achievements.', "fbAppRequests": '.$fb_app_requests.' }';
@@ -165,41 +168,6 @@ class UserController extends \BaseController {
 
 		$user->armada_rank = Input::get('user.armada_rank');
 
-		// ENERGY
-		$old_values = DB::select('select
-																energy,
-																max_energy
-														  from users
-														  where users.id='.$id.';');
-
-		$user->max_energy = Input::get('user.max_energy');
-		$user->energy = Input::get('user.energy');
-
-		if($old_values[0]->energy == $old_values[0]->max_energy) {
-			$user->energy = Input::get('user.energy');
-	 		$new_energy_recharge_start = time();
-	 	}
-		else {
-			$results = DB::select('select
-																	case when energy + new_energy <= max_energy then energy + new_energy else max_energy end as new_energy,
-																	energy as old_energy,
-																	max_energy,
-																	seconds_left
-														 from users
-														 inner join (
-		 											 			select
-																		id,
-																		floor(time_to_sec(timediff(NOW(), energy_recharge_start)) / 300) as new_energy,
-																		time_to_sec(timediff(NOW(), energy_recharge_start)) - (floor(time_to_sec(timediff(NOW(), energy_recharge_start)) / 300) * 300) seconds_left
-																from users
-		 											 	 ) as temp
-		 											 				on users.id = temp.id
-		 											 	 where users.id='.$id.';');
-			$new_energy_recharge_start = time() - $results[0]->seconds_left;
-		}
-
-		$user->energy_recharge_start = date('Y-m-d H:i:s', $new_energy_recharge_start + 7200 /* two hours */);
-
 		$user->save();
 
 		$this->updateRanks();
@@ -215,11 +183,8 @@ class UserController extends \BaseController {
 			'last_name',
 			'rank_by_score',
 			'reached_level',
-			'experience',
 			'armada_id',
-			'armada_rank',
-			'energy',
-			'energy_recharge_start'
+			'armada_rank'
 		);
 		$user = $user->where('id', $id);
 		$user = $user->first();
