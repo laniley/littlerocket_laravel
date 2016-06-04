@@ -114,50 +114,18 @@ class EnergyController extends \BaseController {
 	}
 
 	public function update($id) {
-
-		$old_values = DB::select('select
-																current,
-																max
-														  from users_energy
-														  where id='.$id.';');
-
 		$energy = Energy::findOrFail($id);
-
-		$energy->max = Input::get('userEnergy.max');
-		$energy->current = Input::get('userEnergy.current');
-		$energy->save();
-
-		if($old_values[0]->current == $old_values[0]->max) {
-	 		$new_energy_recharge_start = time();
-		}
-		else {
-			$results = DB::select('select
-																	case when energy + new_energy < max_energy then energy + new_energy else max_energy end as new_energy,
-																	energy as old_energy,
-																	max_energy,
-																	seconds_left
-														 from users
-														 inner join (
-																select
-																		id,
-																		user_id,
-																		current as energy,
-																		max as max_energy,
-																		floor(time_to_sec(timediff(NOW(), last_recharge)) / 300) as new_energy,
-																		time_to_sec(timediff(NOW(), last_recharge)) - (floor(time_to_sec(timediff(NOW(), last_recharge)) / 300) * 300) seconds_left
-																from users_energy
-														 ) as energy
-																	on users.id = energy.user_id
-														 where energy.id='.$id.';');
-
-			$new_energy_recharge_start = time() - $results[0]->seconds_left;
-			$energy->current = $results[0]->new_energy;
-		}
-
-		$energy->last_recharge = date('Y-m-d H:i:s', $new_energy_recharge_start + 7200 /* two hours */);
-
-		$energy->save();
-
+		$energy_input = Input::get('userEnergy.current');
+		$energy = $energy->calculate($energy_input);
 	  return '{"userEnergy":'.$energy.' }';
+	}
+
+	public function buy($id) {
+		$energy = Energy::findOrFail($id);
+		$energy->user->stars -= 100;
+		$energy->user->save();
+		$energy->current += 1;
+		$energy->save();
+		return '{"userEnergy":'.$energy.', "user": '.$energy->user.' }';
 	}
 }

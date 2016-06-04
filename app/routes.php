@@ -23,8 +23,7 @@ Route::group(array('prefix' => '/api/v1/'), function()
     Route::resource('rocketComponents', 'RocketComponentController');
     Route::resource('rocketComponentModels', 'RocketComponentModelController');
     Route::resource('rocketComponentModelMms', 'RocketComponentModelMmController');
-    // Route::resource('rocketComponentModelLevels', 'RocketComponentModelLevelController');
-    // Route::resource('rocketComponentModelLevelMms', 'RocketComponentModelLevelMmController');
     Route::resource('users', 'UserController');
     Route::resource('userEnergies', 'EnergyController');
+    Route::put('userEnergies/{id}/buy', 'EnergyController@buy');
 });
