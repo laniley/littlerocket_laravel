@@ -25,13 +25,6 @@ class FBAppRequestController extends \BaseController {
 
 		$requests = $requests->get();
 
-		if(Input::has('fb_id')) {
-			$users = User::where('fb_id', Input::get('fb_id'))->first();
-			foreach($requests as $request) {
-				$request['user_id'] = $users['id'];
-			}
-		}
-
 		return '{ "fbAppRequests": '.$requests.' }';
 	}
 
