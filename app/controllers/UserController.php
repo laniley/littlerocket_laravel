@@ -125,6 +125,12 @@ class UserController extends \BaseController {
 
 		$user->achievements = $achievement_ids;
 
+		// Energy
+		$energy = Energy::firstOrCreate(array(
+			 'user_id' => $user->id
+		));
+		$user['energy_id'] = $energy->id;
+
 	  return '{"user":'.$user.', "achievements": '.$achievements.'}';
 	}
 
