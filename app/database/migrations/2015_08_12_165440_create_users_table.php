@@ -30,8 +30,8 @@ class CreateUsersTable extends Migration {
 			$table->integer('armada_id')->unsigned()->nullable();
 			$table->string('armada_rank')->nullable();
 			$table->boolean('first_login')->default(true);
-
 			$table->dateTime('last_login')->default('0000-00-00 00:00:00');
+			
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 

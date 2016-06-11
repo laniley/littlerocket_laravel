@@ -37,7 +37,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'gender',
 		'rank',
 		'armada_id',
-		'armada_rank'
+		'armada_rank',
+		'energy',
+		'energy_recharge_start'
 	);
 
 	public function lab() {
@@ -48,8 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
       return $this->hasOne('Rocket');
   }
 
-	public function scopeOfArmada($query, $armada)
-	{
+	public function scopeOfArmada($query, $armada) {
 	  $query = $query->where('armada_id', $armada->id);
 		return $query;
 	}
