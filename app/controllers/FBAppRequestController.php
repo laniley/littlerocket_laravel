@@ -21,9 +21,17 @@ class FBAppRequestController extends \BaseController {
 
 		if(Input::has('fb_id')) {
 			$requests = $requests->where('fb_id', Input::get('fb_id'));
+			// try to find to_user_id
+			$to_user = User::first(array('fb_id', Input::get('fb_id')));
 		}
 
 		$requests = $requests->get();
+
+		if(isset($to_user)) {
+			foreach($requests as $request) {
+				$request["to_user_id"] = $to_user->id;
+			}
+		}
 
 		return '{ "fbAppRequests": '.$requests.' }';
 	}
@@ -40,6 +48,8 @@ class FBAppRequestController extends \BaseController {
 		));
 		$request->type = Input::get('fbAppRequest.type');
 		$request->fb_id = Input::get('fbAppRequest.fb_id');
+		$request->from_user_id = Input::get('fbAppRequest.from_user_id');
+		$request->to_user_id = Input::get('fbAppRequest.to_user_id');
 		$request->armada_id = Input::get('fbAppRequest.armada_id');
 		$request->save();
 	  return '{"fbAppRequest":'.$request.' }';

@@ -43,38 +43,50 @@ class UserController extends \BaseController {
 
 		// if get player -> get also achievements, fb-app-requests and energy
 		if(isset($fb_id) && count($users) > 0) {
+			if(isset($mode) && $mode == "me") {
+				$achievements = Achievement::all();
 
-			$achievements = Achievement::all();
-
-			foreach ($users as $user) {
-				// Achievements
-				$user->rank_by_achievement_points = $user->rankByAchievementPoints();
-				$achievement_ids = [];
-				foreach ($achievements as $achievement) {
-					$achievements_mm = UserAchievementMm::firstOrCreate(array(
-					 'user_id' => $user['id'],
-					 'achievement_id' => $achievement['id']
+				foreach ($users as $user) {
+					// Achievements
+					$user->rank_by_achievement_points = $user->rankByAchievementPoints();
+					$achievement_ids = [];
+					foreach ($achievements as $achievement) {
+						$achievements_mm = UserAchievementMm::firstOrCreate(array(
+						 'user_id' => $user['id'],
+						 'achievement_id' => $achievement['id']
+						));
+						$achievement['id'] = $achievements_mm['id'];
+						$achievement['user_id'] = $user['id'];
+						array_push($achievement_ids, $achievements_mm['id']);
+					}
+					$user->achievements = $achievement_ids;
+					// messages
+					$messages = Message::where('to_user_id', $user->id)->get();
+					$message_ids = [];
+					foreach($messages as $message) {
+						array_push($message_ids, $message['id']);
+					}
+					$user->messages_received = $message_ids;
+					// fb-app-requests
+					$fb_app_requests = FBAppRequest::where('fb_id', $user->fb_id)->get();
+					$request_ids = [];
+					foreach($fb_app_requests as $request) {
+						array_push($request_ids, $request['id']);
+						$request["to_user_id"] = $user->id;
+					}
+					$user->fb_app_requests_received = $request_ids;
+					// Energy
+					$energy = Energy::firstOrCreate(array(
+						 'user_id' => $user->id
 					));
-					$achievement['id'] = $achievements_mm['id'];
-					$achievement['user_id'] = $user['id'];
-					array_push($achievement_ids, $achievements_mm['id']);
+					$user['energy_id'] = $energy->id;
 				}
-				$user->achievements = $achievement_ids;
-				// fb-app-requests
-				$fb_app_requests = FBAppRequest::where('fb_id', $user->fb_id)->get();
-				$request_ids = [];
-				foreach($fb_app_requests as $request) {
-					array_push($request_ids, $request['id']);
-				}
-				$user->fb_app_requests = $request_ids;
-				// Energy
-				$energy = Energy::firstOrCreate(array(
-					 'user_id' => $user->id
-				));
-				$user['energy_id'] = $energy->id;
-			}
 
-			return '{ "users": '.$users.', "achievements": '.$achievements.', "fbAppRequests": '.$fb_app_requests.' }';
+				return '{ "users": '.$users.', "achievements": '.$achievements.', "fbAppRequests": '.$fb_app_requests.', "messages": '.$messages.' }';
+			}
+			else {
+				return '{ "users": '.$users.'}';
+			}
 		}
 		else {
 			return '{ "users": '.$users.'}';
@@ -97,7 +109,6 @@ class UserController extends \BaseController {
 		$user->email = Input::get('user.email');
 		$user->first_name = Input::get('user.first_name');
 		$user->last_name = Input::get('user.last_name');
-		$user->img_url = Input::get('user.img_url');
 		$user->gender = Input::get('user.gender');
 		$user->score = Input::get('user.score');
 		$user->stars = Input::get('user.stars');
@@ -145,7 +156,6 @@ class UserController extends \BaseController {
 		$old_armada_id = $user->armada_id;
 
 		$user->email = Input::get('user.email');
-		$user->img_url = Input::get('user.img_url');
 		$user->gender = Input::get('user.gender');
 		$user->score = Input::get('user.score');
 		$user->stars = Input::get('user.stars');
