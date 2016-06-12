@@ -1,8 +1,15 @@
 /bootstrap/compiled.php
-/vendor
 composer.phar
 composer.lock
 .env.*.php
 .env.php
-.DS_Store
 Thumbs.db
+
+# Dependencies
+/vendor
+
+# Individual Files
+/app/config/local/*
+
+# MAC DS_Store Files
+.DS_Store
