@@ -10,7 +10,7 @@ Thumbs.db
 /vendor
 
 # Configs
-/app/config/database.phps
+/app/config/database.php
 
 # Individual Files
 /app/config/local/*
