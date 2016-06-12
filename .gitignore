@@ -3,10 +3,14 @@ composer.phar
 composer.lock
 .env.*.php
 .env.php
+.env
 Thumbs.db
 
 # Dependencies
 /vendor
+
+# Configs
+/app/config/database.phps
 
 # Individual Files
 /app/config/local/*
