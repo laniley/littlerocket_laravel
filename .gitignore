@@ -1,6 +1,15 @@
 /bootstrap/compiled.php
-/app/database/csv
-/app/config/database.php
+composer.phar
+composer.lock
 .env.*.php
 .env.php
-.env
+Thumbs.db
+
+# Dependencies
+/vendor
+
+# Individual Files
+/app/config/local/*
+
+# MAC DS_Store Files
+.DS_Store
