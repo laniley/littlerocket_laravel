@@ -22,7 +22,7 @@ class FBAppRequestController extends \BaseController {
 		if(Input::has('fb_id')) {
 			$requests = $requests->where('fb_id', Input::get('fb_id'));
 			// try to find to_user_id
-			$to_user = User::first(array('fb_id', Input::get('fb_id')));
+			$to_user = User::where('fb_id', Input::get('fb_id'))->first();
 		}
 
 		$requests = $requests->get();
