@@ -15,7 +15,7 @@ class RocketComponent extends Eloquent{
 	 */
 	protected $hidden = array('created_at', 'updated_at', 'myRocketComponentModelMms');
 
-	protected $fillable = array('rocket_id', 'selectedRocketComponentModelMm');
+	protected $fillable = array('rocket_id', 'type', 'selectedRocketComponentModelMm');
 
 	public function rocket()
   {
