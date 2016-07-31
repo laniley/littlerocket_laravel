@@ -15,7 +15,7 @@ class CreateQuestRewardTypesTable extends Migration {
 		Schema::create('quest_reward_types', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
+			$table->string('object');
 
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

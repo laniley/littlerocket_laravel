@@ -14,11 +14,15 @@ class QuestRewardTypesTableSeeder extends BaseSeeder {
     DB::table($this->table)->truncate();
 
     QuestRewardType::create(array(
-      'name' => 'stars'
+      'object' => 'XP'
     ));
 
     QuestRewardType::create(array(
-      'name' => 'XP'
+      'object' => 'stars'
+    ));
+
+    QuestRewardType::create(array(
+      'object' => 'energy'
     ));
   }
 

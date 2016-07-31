@@ -16,10 +16,7 @@ class CreateQuestsTable extends Migration {
 		{
 			$table->increments('id');
 
-			$table->string('title');
-			$table->string('description');
-
-			$table->integer('parent_id')->unsigned();
+			$table->integer('parent_id')->unsigned()->nullable();
 
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
