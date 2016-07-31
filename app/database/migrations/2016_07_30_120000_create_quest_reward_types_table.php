@@ -29,7 +29,10 @@ class CreateQuestRewardTypesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('quest_reward_types');
+		if (Schema::hasTable('quest_reward_types'))
+		{
+			Schema::drop('quest_reward_types');
+		}
 	}
 
 }
