@@ -37,7 +37,10 @@ class CreateUsersEnergyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users_energy');
+		if (Schema::hasTable('users_energy'))
+		{
+			Schema::drop('users_energy');
+		}
 	}
 
 }

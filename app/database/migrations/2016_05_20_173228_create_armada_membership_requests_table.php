@@ -36,7 +36,10 @@ class CreateArmadaMembershipRequestsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('armada_membership_requests');
+		if (Schema::hasTable('armada_membership_requests'))
+		{
+			Schema::drop('armada_membership_requests');
+		}
 	}
 
 }

@@ -42,7 +42,10 @@ class CreateFbApprequestsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('fb_apprequests');
+		if (Schema::hasTable('fb_apprequests'))
+		{
+			Schema::drop('fb_apprequests');
+		}
 	}
 
 }

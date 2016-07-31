@@ -28,7 +28,10 @@ class CreateArmadasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('armadas');
+		if (Schema::hasTable('armadas'))
+		{
+			Schema::drop('armadas');
+		}
 	}
 
 }
