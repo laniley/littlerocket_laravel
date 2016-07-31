@@ -21,18 +21,10 @@ class CreateQuestsTable extends Migration {
 
 			$table->integer('parent_id')->unsigned();
 
-			$table->integer('fulfillment_amount')->unsigned();
-			$table->integer('fulfillment_type_id')->unsigned();
-
-			$table->integer('reward_amount')->unsigned();
-			$table->integer('reward_type_id')->unsigned();
-
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
 			$table->foreign('parent_id')->references('id')->on('quests');
-			$table->foreign('reward_type_id')->references('id')->on('quest_reward_types');
-			$table->foreign('fulfillment_type_id')->references('id')->on('quest_fulfillment_types');
 		});
 	}
 
@@ -43,7 +35,10 @@ class CreateQuestsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('quests');
+		if (Schema::hasTable('quests'))
+		{
+			Schema::drop('quests');
+		}
 	}
 
 }
