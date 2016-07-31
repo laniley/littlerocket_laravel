@@ -9,11 +9,11 @@ class MessageController extends \BaseController {
 	 */
 	public function index() {
 
-		// $requests = new FBAppRequest();
-		//
-		// if(Input::has('armada_id')) {
-		// 	$requests = $requests->where('armada_id', Input::get('armada_id'));
-		// }
+		$messages = new Message();
+
+		if(Input::has('to_user_id')) {
+			$messages = $messages->where('to_user_id', Input::get('to_user_id'));
+		}
 		//
 		// if(Input::has('type')) {
 		// 	$requests = $requests->where('type', Input::get('type'));
@@ -24,16 +24,16 @@ class MessageController extends \BaseController {
 		// 	// try to find to_user_id
 		// 	$to_user = User::first(array('fb_id', Input::get('fb_id')));
 		// }
-		//
-		// $requests = $requests->get();
-		//
+
+		$messages = $messages->get();
+
 		// if(isset($to_user)) {
 		// 	foreach($requests as $request) {
 		// 		$request["to_user_id"] = $to_user->id;
 		// 	}
 		// }
-		//
-		// return '{ "fbAppRequests": '.$requests.' }';
+
+		return '{ "messages": '.$messages.' }';
 	}
 
 	/**
